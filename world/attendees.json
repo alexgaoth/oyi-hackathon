@@ -1,0 +1,801 @@
+[
+  {
+    "name": "Tianhao (Alex) Gao"
+  },
+  {
+    "name": "Aadi Dahake"
+  },
+  {
+    "name": "Abhinav Nigam"
+  },
+  {
+    "name": "Adam AlSayyad",
+    "role": "Founder",
+    "extra": "Cascade, W26"
+  },
+  {
+    "name": "Adarsh Kumar"
+  },
+  {
+    "name": "Aditya Dwivedi"
+  },
+  {
+    "name": "Aditya Gaur"
+  },
+  {
+    "name": "Advaiyt Sane"
+  },
+  {
+    "name": "Advaiyt Sane",
+    "role": "Founder",
+    "extra": "Memorable, S27"
+  },
+  {
+    "name": "Agni R"
+  },
+  {
+    "name": "Agustin Suarez"
+  },
+  {
+    "name": "Ahmed Abushagur"
+  },
+  {
+    "name": "Albert Chen"
+  },
+  {
+    "name": "Albert Law"
+  },
+  {
+    "name": "Alex Chen"
+  },
+  {
+    "name": "Alex Graveley",
+    "role": "Founder",
+    "extra": "UFO.ai, F26"
+  },
+  {
+    "name": "Alex Le"
+  },
+  {
+    "name": "Alex Selig",
+    "role": "Founder",
+    "extra": "SoundFocus, S13"
+  },
+  {
+    "name": "Alexandros Kyriakakis"
+  },
+  {
+    "name": "Ali Khalfan"
+  },
+  {
+    "name": "Ali amjad"
+  },
+  {
+    "name": "Alrick Dsouza"
+  },
+  {
+    "name": "Amedeo Ercole"
+  },
+  {
+    "name": "Ananya Pradhan"
+  },
+  {
+    "name": "Angelina Nguyen"
+  },
+  {
+    "name": "Anish Gupta"
+  },
+  {
+    "name": "Anish Kamatam"
+  },
+  {
+    "name": "Ankit Shah"
+  },
+  {
+    "name": "Ansh Tiwari",
+    "role": "Founder",
+    "extra": "Rasyn, S26"
+  },
+  {
+    "name": "Anshu Arora"
+  },
+  {
+    "name": "Apekshik Panigrahi"
+  },
+  {
+    "name": "Arav Dharnikota"
+  },
+  {
+    "name": "Arjun Lohan"
+  },
+  {
+    "name": "Asher Chok"
+  },
+  {
+    "name": "Ashwin Reddy"
+  },
+  {
+    "name": "Atharva Sindwani"
+  },
+  {
+    "name": "Atila Vahedian"
+  },
+  {
+    "name": "Atin Kumar Singh"
+  },
+  {
+    "name": "Avi Peltz"
+  },
+  {
+    "name": "Ayaan Gazali"
+  },
+  {
+    "name": "Ayush Chauhan",
+    "role": "Founder",
+    "extra": "Rasyn, S26"
+  },
+  {
+    "name": "Ayush Ojha",
+    "extra": "Invited"
+  },
+  {
+    "name": "Azizjon Rakhimov"
+  },
+  {
+    "name": "Benjamin Barrera-Altuna"
+  },
+  {
+    "name": "Benny Jiang"
+  },
+  {
+    "name": "Bikram Brar"
+  },
+  {
+    "name": "BinBin He",
+    "role": "Founder",
+    "extra": "smol machines, P26"
+  },
+  {
+    "name": "Blake Masters"
+  },
+  {
+    "name": "Bowen Wang"
+  },
+  {
+    "name": "Brad Gessler"
+  },
+  {
+    "name": "Brandon Lin"
+  },
+  {
+    "name": "Bryan Tegomoh, MD, MPH"
+  },
+  {
+    "name": "Carl Vincent Ladres Kho"
+  },
+  {
+    "name": "Charles Cao"
+  },
+  {
+    "name": "Charles Conner"
+  },
+  {
+    "name": "Charles Zheng"
+  },
+  {
+    "name": "Charlie Jia"
+  },
+  {
+    "name": "Chinat Yu"
+  },
+  {
+    "name": "Chris Lee"
+  },
+  {
+    "name": "Cole Simner"
+  },
+  {
+    "name": "Cosmin Bararu"
+  },
+  {
+    "name": "Daniel Kivatinos",
+    "role": "Founder",
+    "extra": "loopfour, W23"
+  },
+  {
+    "name": "Daniel Qi"
+  },
+  {
+    "name": "Daniil Ostashev"
+  },
+  {
+    "name": "Daood Hashmi",
+    "role": "Founder",
+    "extra": "Rasyn, S26"
+  },
+  {
+    "name": "Derek Wang"
+  },
+  {
+    "name": "Devansh Agarwal"
+  },
+  {
+    "name": "Devesh Aggarwal"
+  },
+  {
+    "name": "Dharshini Maru"
+  },
+  {
+    "name": "Dhyey Mavani"
+  },
+  {
+    "name": "Diar Shakimov"
+  },
+  {
+    "name": "Dima Soboliev"
+  },
+  {
+    "name": "Dmitry Ulyumdzhiev"
+  },
+  {
+    "name": "Drishti Jain"
+  },
+  {
+    "name": "Dylan Nguyen"
+  },
+  {
+    "name": "Eduardo Reis"
+  },
+  {
+    "name": "Edwin Onyango"
+  },
+  {
+    "name": "Elikem Kuivi"
+  },
+  {
+    "name": "Eliza Huang"
+  },
+  {
+    "name": "Emre Barut"
+  },
+  {
+    "name": "Eric Wiener",
+    "role": "Founder",
+    "extra": "Reframe, W26"
+  },
+  {
+    "name": "Erik Dahl",
+    "role": "Founder",
+    "extra": "Parrot, F25"
+  },
+  {
+    "name": "Etelson Alcius"
+  },
+  {
+    "name": "Ethan Lam"
+  },
+  {
+    "name": "Eve Bouffard",
+    "role": "YC Staff",
+    "extra": "Y Combinator"
+  },
+  {
+    "name": "FNU Shubh"
+  },
+  {
+    "name": "Fergus Hurley"
+  },
+  {
+    "name": "Francisco Maranchello"
+  },
+  {
+    "name": "Gabrielle Rokeach",
+    "role": "YC Staff"
+  },
+  {
+    "name": "Garrett Cason",
+    "role": "YC Staff"
+  },
+  {
+    "name": "Garry Tan",
+    "role": "YC Staff",
+    "extra": "Y Combinator"
+  },
+  {
+    "name": "Gautam Anand"
+  },
+  {
+    "name": "Gautam Jajoo"
+  },
+  {
+    "name": "Gokhulnath Thirumaran"
+  },
+  {
+    "name": "Gursharan Singh"
+  },
+  {
+    "name": "Hanming Ye",
+    "role": "Founder",
+    "extra": "Waddle Labs, S26"
+  },
+  {
+    "name": "Hannah Zhou"
+  },
+  {
+    "name": "Harsh Karia"
+  },
+  {
+    "name": "Harshith Mullapudi"
+  },
+  {
+    "name": "Iana Lin"
+  },
+  {
+    "name": "Ievgen Soboliev"
+  },
+  {
+    "name": "Igor Babuschkin"
+  },
+  {
+    "name": "Ishaan Pandey"
+  },
+  {
+    "name": "Jacob Valdez"
+  },
+  {
+    "name": "Jae Shik Yeum"
+  },
+  {
+    "name": "Jake Roggenbuck"
+  },
+  {
+    "name": "James Tan"
+  },
+  {
+    "name": "Jamison Mercurio",
+    "role": "Founder",
+    "extra": "GBrain, P26"
+  },
+  {
+    "name": "Javier Aldape",
+    "role": "Founder",
+    "extra": "Kredi, W21"
+  },
+  {
+    "name": "Jay Zare"
+  },
+  {
+    "name": "Jennifer Chen"
+  },
+  {
+    "name": "Jerry Chang"
+  },
+  {
+    "name": "Jerry Wang"
+  },
+  {
+    "name": "John Winnicki"
+  },
+  {
+    "name": "Joshua France",
+    "role": "YC Staff",
+    "extra": "Y Combinator"
+  },
+  {
+    "name": "Karan Ganesan"
+  },
+  {
+    "name": "Kartik Gaurav Kapoor"
+  },
+  {
+    "name": "Kausthubh Veldanda"
+  },
+  {
+    "name": "Kevin Jiang"
+  },
+  {
+    "name": "Kevin Miao",
+    "role": "Founder",
+    "extra": "Bryel, F26"
+  },
+  {
+    "name": "Khagendra Khatri"
+  },
+  {
+    "name": "Kiet Ho",
+    "role": "Founder",
+    "extra": "Superset, P26"
+  },
+  {
+    "name": "Konstantin Marunchenko"
+  },
+  {
+    "name": "Krish Golcha"
+  },
+  {
+    "name": "Krishiv Thakuria"
+  },
+  {
+    "name": "Kuberan Marimuthu",
+    "role": "Founder",
+    "extra": "Cypher, W22"
+  },
+  {
+    "name": "Kush Ise"
+  },
+  {
+    "name": "Leia Chavarria-Davila"
+  },
+  {
+    "name": "Leon Kwan"
+  },
+  {
+    "name": "Louis Beaumont",
+    "role": "Founder",
+    "extra": "screenpipe, S26"
+  },
+  {
+    "name": "Lucia Du"
+  },
+  {
+    "name": "Ludovic Granger",
+    "role": "Founder",
+    "extra": "Leadbay, F25"
+  },
+  {
+    "name": "Luke Shiels",
+    "role": "Founder",
+    "extra": "Interfere, S25"
+  },
+  {
+    "name": "Malik Salim"
+  },
+  {
+    "name": "Manan Shah"
+  },
+  {
+    "name": "Marc Smeds"
+  },
+  {
+    "name": "Marcin Michalski"
+  },
+  {
+    "name": "Marshall Kiely",
+    "role": "Founder",
+    "extra": "UFO.ai, F26"
+  },
+  {
+    "name": "Matthew Garcia"
+  },
+  {
+    "name": "Matthew Kim"
+  },
+  {
+    "name": "Matthew Molinar"
+  },
+  {
+    "name": "Mehul Arora"
+  },
+  {
+    "name": "Michael Cafiero"
+  },
+  {
+    "name": "Mihir Modi"
+  },
+  {
+    "name": "Mike Kovetskyi"
+  },
+  {
+    "name": "Minchan Kim"
+  },
+  {
+    "name": "Muhammad Zubair Zafar"
+  },
+  {
+    "name": "Naman Kabra"
+  },
+  {
+    "name": "Neel Kansara"
+  },
+  {
+    "name": "Neel Majmudar"
+  },
+  {
+    "name": "Nikhil Krishnaswamy",
+    "role": "Founder",
+    "extra": "Memorable, S27"
+  },
+  {
+    "name": "Nikos Liodakis"
+  },
+  {
+    "name": "Nilesh Agarwal"
+  },
+  {
+    "name": "Niloy Biswas"
+  },
+  {
+    "name": "Nithin Aruswamy"
+  },
+  {
+    "name": "Ojasva Mishra"
+  },
+  {
+    "name": "Omar Khalil"
+  },
+  {
+    "name": "Oscar Brisset",
+    "role": "Founder",
+    "extra": "Remy AI, W26"
+  },
+  {
+    "name": "PHU QUACH"
+  },
+  {
+    "name": "Pamela Quartson"
+  },
+  {
+    "name": "Parthiv Chandran"
+  },
+  {
+    "name": "Parv Jain"
+  },
+  {
+    "name": "Patrick Liu"
+  },
+  {
+    "name": "Peter Olkhovets"
+  },
+  {
+    "name": "Peyton Li"
+  },
+  {
+    "name": "Pramod Kotipalli"
+  },
+  {
+    "name": "Pranav Achar"
+  },
+  {
+    "name": "Pranav Sharan"
+  },
+  {
+    "name": "Prasanna A P"
+  },
+  {
+    "name": "Prashanth Babu"
+  },
+  {
+    "name": "Prerit Oberai",
+    "role": "Founder",
+    "extra": "Prototyping.io, P26"
+  },
+  {
+    "name": "Pushpinder Singh"
+  },
+  {
+    "name": "Rahul Arulkumaran"
+  },
+  {
+    "name": "Raj Palkar"
+  },
+  {
+    "name": "Rakesh Goyal",
+    "role": "Founder",
+    "extra": "Velt, W22"
+  },
+  {
+    "name": "Rapael Kalandadze"
+  },
+  {
+    "name": "Rashid Aziz",
+    "role": "Founder",
+    "extra": "Hutsy, S19"
+  },
+  {
+    "name": "Raya Skaf"
+  },
+  {
+    "name": "Richard Ng"
+  },
+  {
+    "name": "Rithvik Burki"
+  },
+  {
+    "name": "Robb Walters"
+  },
+  {
+    "name": "Rohan Sehgal"
+  },
+  {
+    "name": "Rohith K"
+  },
+  {
+    "name": "Ryan Fong"
+  },
+  {
+    "name": "Saahith Veeramaneni"
+  },
+  {
+    "name": "Sami Sadfa"
+  },
+  {
+    "name": "Samia Kilpatrick"
+  },
+  {
+    "name": "Samir Sen",
+    "role": "Founder",
+    "extra": "Flair Labs, S22"
+  },
+  {
+    "name": "Samuel Choi"
+  },
+  {
+    "name": "Samuel Zhang"
+  },
+  {
+    "name": "Sandra Ho"
+  },
+  {
+    "name": "Sara Kothari"
+  },
+  {
+    "name": "Satya Patel",
+    "role": "Founder",
+    "extra": "Superset, P26"
+  },
+  {
+    "name": "Saurav Joshi"
+  },
+  {
+    "name": "Savir Dillikar"
+  },
+  {
+    "name": "Scott Fitzgerald"
+  },
+  {
+    "name": "Seiji Sakurai"
+  },
+  {
+    "name": "Shahdad Kompanizare"
+  },
+  {
+    "name": "Shijie Wang",
+    "role": "Founder",
+    "extra": "Allus AI, F25"
+  },
+  {
+    "name": "Shiv Arora"
+  },
+  {
+    "name": "Shubhankit Singh"
+  },
+  {
+    "name": "Shubhra Jain"
+  },
+  {
+    "name": "Siddhant Shingi"
+  },
+  {
+    "name": "Simon Farshid",
+    "role": "Founder",
+    "extra": "assistant-ui, W25"
+  },
+  {
+    "name": "Sina Atalay"
+  },
+  {
+    "name": "Sina Matian"
+  },
+  {
+    "name": "Sissi Wang"
+  },
+  {
+    "name": "Sreekanth Putta"
+  },
+  {
+    "name": "Sri Raghu Malireddi",
+    "role": "Founder",
+    "extra": "Moss, F25"
+  },
+  {
+    "name": "Stephen Hung"
+  },
+  {
+    "name": "Suriya Nithyanandan"
+  },
+  {
+    "name": "Swarchis Kulkarni"
+  },
+  {
+    "name": "Syon Khatter"
+  },
+  {
+    "name": "Tanmai Kalisipudi"
+  },
+  {
+    "name": "Thanawat Sornwanee"
+  },
+  {
+    "name": "Todd Tan"
+  },
+  {
+    "name": "Tom Mclaughlin"
+  },
+  {
+    "name": "Touko Ursin"
+  },
+  {
+    "name": "Tri Nguyen"
+  },
+  {
+    "name": "Tristan Linardos"
+  },
+  {
+    "name": "Umar Ghani"
+  },
+  {
+    "name": "Uzma Hamid"
+  },
+  {
+    "name": "VISHNU KRISHNAPRASAD",
+    "role": "Founder",
+    "extra": "Agent 37, F26"
+  },
+  {
+    "name": "Vachan Bhogi"
+  },
+  {
+    "name": "Vatsal Bajaj"
+  },
+  {
+    "name": "Vedant Mehta"
+  },
+  {
+    "name": "Victor Chen"
+  },
+  {
+    "name": "Vinay Datta Pinnaka",
+    "role": "Founder",
+    "extra": "loopfour, W23"
+  },
+  {
+    "name": "Vishesh Verma"
+  },
+  {
+    "name": "William Tholke"
+  },
+  {
+    "name": "Yash More"
+  },
+  {
+    "name": "Yashnil Mohanty"
+  },
+  {
+    "name": "Yiding Song",
+    "role": "Founder",
+    "extra": "Waddle Labs, S26"
+  },
+  {
+    "name": "Yug Amol More"
+  },
+  {
+    "name": "Yurong Jiang"
+  },
+  {
+    "name": "Yuting Wang"
+  },
+  {
+    "name": "Zachary Yu",
+    "role": "Founder",
+    "extra": "Belvedir, S26"
+  },
+  {
+    "name": "Zeed Almelhem"
+  },
+  {
+    "name": "Zubin Pahuja"
+  },
+  {
+    "name": "ben nisevich"
+  }
+]
