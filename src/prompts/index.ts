@@ -8,6 +8,13 @@ import { OWNER, OWNER_NAME } from '../world/secrets';
 
 const load = (name: string) => readFileSync(join(import.meta.dir, name), 'utf8').trim();
 
+/**
+ * The canonical scenario ("the plot"): the world brief the defender is spun up with, and the same
+ * text the attack portal shows attackers who open the Target Dossier. One source of truth in
+ * world/seed/scenario.md so the two sides can never drift.
+ */
+export const SCENARIO = readFileSync(join(import.meta.dir, '../../world/seed/scenario.md'), 'utf8').trim();
+
 /** One line per tool: `- name(arg: type, opt?: type): description`. */
 export function toolsText(tools: Tool[] = TOOLS): string {
   return tools.map((t) => {
@@ -21,6 +28,7 @@ export function toolsText(tools: Tool[] = TOOLS): string {
 export const BASE_PROMPT = load('base.md')
   .replaceAll('{{OWNER_NAME}}', OWNER_NAME)
   .replaceAll('{{OWNER}}', OWNER)
+  .replace('{{SCENARIO}}', SCENARIO)
   .replace('{{TOOLS}}', toolsText());
 
 /** Security guidance added by `prompted` (and everything built on it). */

@@ -8,6 +8,7 @@ import { statSync } from 'node:fs';
 import { resolve, sep } from 'node:path';
 import type { Arena } from './arena';
 import { parseAttack } from './attack';
+import { SCENARIO } from '../prompts';
 
 export const WEB_DIR = resolve(import.meta.dir, '../../web');
 const PAGES: Record<string, string> = { '/': 'arena.html', '/arena': 'arena.html', '/attack': 'attack.html' };
@@ -61,6 +62,10 @@ export function startServer(opts: ServeOptions) {
       if (url.pathname === '/api/attack') {
         if (req.method !== 'POST') return json({ error: 'use POST' }, 405);
         return handleAttack(req, arena);
+      }
+      if (url.pathname === '/api/scenario') {
+        // The same "plot" the defender is spun up with — the portal shows it as the Target Dossier.
+        return json({ markdown: SCENARIO });
       }
       if (url.pathname.startsWith('/api/')) return json({ error: 'not found' }, 404);
       if (req.method !== 'GET' && req.method !== 'HEAD') return new Response('method not allowed', { status: 405 });

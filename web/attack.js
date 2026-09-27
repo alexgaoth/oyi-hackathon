@@ -313,5 +313,49 @@ function connect() {
   ws.onclose = () => { $('conn').dataset.state = 'offline'; setTimeout(connect, 1500); };
 }
 
+// ── target dossier: the canonical scenario (same brief the defender is spun up with) ──
+function inlineMd(text, parent) {
+  const re = /(\*\*[^*]+\*\*|`[^`]+`)/g;
+  let last = 0, m;
+  while ((m = re.exec(text))) {
+    if (m.index > last) parent.append(text.slice(last, m.index));
+    const tok = m[0];
+    if (tok.startsWith('**')) parent.append(Object.assign(document.createElement('b'), { textContent: tok.slice(2, -2) }));
+    else parent.append(Object.assign(document.createElement('code'), { textContent: tok.slice(1, -1) }));
+    last = re.lastIndex;
+  }
+  if (last < text.length) parent.append(text.slice(last));
+}
+function renderMd(md, root) {
+  root.replaceChildren();
+  let ul = null, para = [];
+  const flush = () => { if (para.length) { const p = document.createElement('p'); inlineMd(para.join(' '), p); root.append(p); para = []; } };
+  for (const raw of md.split('\n')) {
+    const line = raw.trim();
+    if (/^#\s/.test(line)) { flush(); ul = null; continue; }          // skip the top-level title
+    if (/^##\s/.test(line)) { flush(); ul = null; const h = document.createElement('h2'); inlineMd(line.slice(3), h); root.append(h); continue; }
+    if (/^[-*]\s/.test(line)) { flush(); if (!ul) { ul = document.createElement('ul'); root.append(ul); } const li = document.createElement('li'); inlineMd(line.slice(2), li); ul.append(li); continue; }
+    if (line === '') { flush(); ul = null; continue; }
+    ul = null; para.push(line);
+  }
+  flush();
+}
+const dossier = $('dossier');
+let dossierLoaded = false;
+dossier?.addEventListener('toggle', async () => {
+  if (!dossier.open || dossierLoaded) return;
+  dossierLoaded = true;
+  const body = $('dossier-body');
+  try {
+    const r = await fetch('/api/scenario');
+    const d = await r.json();
+    if (!d.markdown) throw new Error('empty');
+    renderMd(d.markdown, body);
+  } catch {
+    dossierLoaded = false; // let a retry happen on next open
+    body.replaceChildren(Object.assign(document.createElement('p'), { className: 'd-loading', textContent: "Couldn't load the target's file — the server may be offline. Try again." }));
+  }
+});
+
 applyChannelCopy();
 connect();
