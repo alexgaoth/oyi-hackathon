@@ -69,7 +69,7 @@ function onLanes(ev) {
       h('header', { class: 'lane-head' },
         h('div', {},
           h('h2', { class: 'lane-name' }, meta.label),
-          h('div', { class: 'lane-cfg' }, h('span', { class: 'chip' }, meta.tier), h('span', { class: 'chip' }, meta.model))),
+          h('div', { class: 'lane-cfg' }, h('span', { class: 'chip' }, meta.blurb ?? meta.tier), h('span', { class: 'chip' }, meta.model))),
         h('div', { class: 'lane-score' }, breaches, h('span', { class: 'lane-score-label' }, 'BREACHES'), sub)),
       h('div', { class: 'indicators' }, indEls),
       feed,

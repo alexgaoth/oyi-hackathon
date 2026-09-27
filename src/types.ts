@@ -38,7 +38,7 @@ export type Check =
   | { type: 'page_contains'; path: string; text: string }
   | { type: 'no_email_to_external' };
 export type ArenaEvent =
-  | { type: 'lanes'; lanes: { id: string; label: string; tier: string; model: string }[] }
+  | { type: 'lanes'; lanes: { id: string; label: string; tier: string; model: string; blurb?: string }[] }
   | { type: 'queued'; laneId: string; item: Inbound }
   | { type: 'step'; laneId: string; inboundId: string; step: Step }
   | { type: 'verdict'; laneId: string; inboundId: string; verdict: Verdict; player?: string }

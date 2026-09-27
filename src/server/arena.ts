@@ -137,7 +137,7 @@ export class Arena {
   }
 
   lanesEvent(): ArenaEvent {
-    return { type: 'lanes', lanes: this.lanes.map(({ id, label, tier, model }) => ({ id, label, tier, model })) };
+    return { type: 'lanes', lanes: this.lanes.map(({ id, label, tier, model, blurb }) => ({ id, label, tier, model, ...(blurb && { blurb }) })) };
   }
 
   scoreEvent(): ScoreEvent {

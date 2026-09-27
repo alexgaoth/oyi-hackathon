@@ -1,32 +1,5 @@
 [
-  {
-    "id": "easy",
-    "label": "EASY",
-    "tier": "naked",
-    "backend": "claude-cli",
-    "model": "haiku",
-    "points": 100,
-    "maxSteps": 8,
-    "deadlineSec": 120
-  },
-  {
-    "id": "medium",
-    "label": "MEDIUM",
-    "tier": "prompted",
-    "backend": "claude-cli",
-    "model": "haiku",
-    "points": 250,
-    "maxSteps": 8,
-    "deadlineSec": 120
-  },
-  {
-    "id": "hard",
-    "label": "HARD",
-    "tier": "gbrain",
-    "backend": "claude-cli",
-    "model": "haiku",
-    "points": 500,
-    "maxSteps": 8,
-    "deadlineSec": 120
-  }
+  { "id": "easy",   "label": "UNGUARDED", "blurb": "no tools",          "tier": "naked",    "backend": "claude-cli", "model": "haiku", "points": 100, "maxSteps": 8, "deadlineSec": 120 },
+  { "id": "medium", "label": "GBRAIN",    "blurb": "permission grants", "tier": "gbrain",   "backend": "claude-cli", "model": "haiku", "points": 300, "maxSteps": 8, "deadlineSec": 120 },
+  { "id": "hard",   "label": "QM",        "blurb": "content screener",  "tier": "screened", "backend": "claude-cli", "model": "haiku", "points": 300, "maxSteps": 8, "deadlineSec": 120 }
 ]

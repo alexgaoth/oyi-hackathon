@@ -155,7 +155,7 @@ function renderLanes(list) {
     input.checked = current ? current === l.id : i === 0;
     const span = document.createElement('span');
     const small = document.createElement('small');
-    small.textContent = l.model;
+    small.textContent = l.blurb ?? l.model;
     span.append(l.label, small);
     label.append(input, span);
     return label;

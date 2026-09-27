@@ -12,7 +12,7 @@ export type LaneBackend = (typeof BACKENDS)[number];
 
 export interface LaneConfig {
   id: string; label: string; tier: string; backend: LaneBackend; model: string;
-  points?: number; maxSteps?: number; deadlineSec?: number;
+  blurb?: string; points?: number; maxSteps?: number; deadlineSec?: number;
 }
 
 export const LANE_DEFAULTS = { points: 100, maxSteps: 8, deadlineSec: 90 } as const;
@@ -30,6 +30,8 @@ export function parseLanes(raw: unknown, source = 'lanes'): LaneConfig[] {
       return v.trim();
     };
     const lane: LaneConfig = { id: str('id'), label: str('label'), tier: str('tier'), backend: str('backend') as LaneBackend, model: str('model') };
+    const blurbV = (l as Record<string, unknown>).blurb;
+    if (typeof blurbV === 'string' && blurbV.trim()) lane.blurb = blurbV.trim();
     if (seen.has(lane.id)) throw new Error(`${where}: duplicate lane id "${lane.id}"`);
     seen.add(lane.id);
     getTier(lane.tier); // throws on an unknown tier
