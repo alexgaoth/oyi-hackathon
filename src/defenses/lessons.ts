@@ -61,17 +61,11 @@ export function lessonsBlock(path = ACTIVE_LESSONS): string {
   return `## Procedural memory — lessons from past attacks (apply them)\n\n${md}`;
 }
 
-// ── optional real-Memorable backend (CTB_MEMORABLE=1) ────────────────────────────────────────
-const useMemorable = () => process.env.CTB_MEMORABLE === '1';
-
-/** Record each procedure into the real memorable-cli store. No-op unless CTB_MEMORABLE=1. */
-export async function recordToMemorable(lessons: Lesson[]): Promise<{ recorded: number; note: string }> {
-  if (!useMemorable()) return { recorded: 0, note: 'CTB_MEMORABLE unset — using the local markdown store' };
-  let recorded = 0;
-  for (const l of dedupe(lessons)) {
-    const text = `When handling a ${l.category} ${l.channel} message aimed at ${l.goal}: ${l.rule}`;
-    const p = Bun.spawn(['npx', 'memorable-cli', 'record', '--text', text], { stdout: 'pipe', stderr: 'pipe', stdin: 'ignore' });
-    if ((await p.exited) === 0) recorded++;
-  }
-  return { recorded, note: recorded ? `recorded ${recorded} procedures via memorable-cli` : 'memorable-cli refused (run `npx memorable-cli enable` first)' };
+// NOTE (honest status): this is our OWN procedural-memory store (markdown), *modeled on* Memorable
+// (memorable.sh) — it is not Memorable running. A real integration would use Memorable's actual
+// interface: `memorable record` captures an agent session trace and `memorable recall <query>` /
+// `POST /v1/extract` retrieves procedures — NOT a freeform string. That is not wired yet, so we do
+// not pretend to call it. See docs/sponsor-defenders.md "Honest status".
+export async function recordToMemorable(_lessons: Lesson[]): Promise<{ recorded: number; note: string }> {
+  return { recorded: 0, note: 'local markdown store (modeled on Memorable; real memorable-cli record/recall not wired yet)' };
 }

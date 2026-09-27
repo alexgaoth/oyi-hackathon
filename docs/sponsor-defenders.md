@@ -49,3 +49,26 @@ Memorable CLI store; otherwise the local markdown store is used (offline, no set
   improve on — expect a small or null effect, and read the mechanism as the point, not the number.
   The `fake` backend proves the pipeline (it plays each attack's winnability move regardless of the
   prompt, so before==after there by construction).
+
+## Honest status (what is real vs modeled-on)
+
+Being precise so nothing overclaims — the arena engine (judge, defender, tools, console,
+measurement) is real; the sponsor *bindings* are mostly modeled-on, not the sponsors' software
+running:
+
+- **GBrain — real as a search backend only.** With `CTB_BRAIN=gbrain` the real GBrain binary runs
+  and backs `search_brain`/`read_page`/`write_page` (verified, zero network). It is **not wired into
+  the demo lanes by default** (the brain is process-global, not per-lane) and it does **not** enforce
+  the HARD lane's permissions — those are our `scopedPolicy`, *modeled on* GBrain's Off/Read/Draft/
+  Manage/Full grades. So HARD is "GBrain-style," not GBrain enforcing.
+- **QM (`screened`) — modeled on, not QM.** Our own LLM screener in the spirit of QM's Auto posture.
+  No QM code is imported or ported.
+- **Memorable (`immune`) — modeled on, not Memorable.** Our own markdown lesson store; the `immune`
+  tier reads `world/lessons/active.md`, it does not recall from Memorable. Memorable's real interface
+  (`record` session traces / `recall`) is not wired.
+- **River / Superset / UFO — not integrated.** River is roadmap (adapter + SFT export exist, no model
+  trained/served); Superset/UFO are framing only.
+
+Making any one of these genuinely enforce (e.g. routing the defender's tools through GBrain's MCP
+with a scoped token, on a weak base model so the tool visibly holds where the model breaks) is the
+real "these tools protect your intelligence" build — deliberately deferred.

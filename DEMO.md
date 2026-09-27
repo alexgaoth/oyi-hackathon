@@ -64,7 +64,7 @@ bun run scripts/serve.ts --lanes config/lanes.json --host 0.0.0.0 --port 4173
   (vault/ledger/memory/contacts) reacting, and a BREACHED (with proof + points) / DEFENDED verdict.
   It is driven entirely by the live event stream, so it is a real attack, not a replay.
 - `config/lanes.json` is the headline configuration: EASY naked/haiku, MEDIUM
-  prompted/haiku, HARD gbrain/haiku — GBrain permission grants (claude-cli).
+  prompted/haiku, HARD gbrain/haiku — GBrain-style permission grants (claude-cli).
 - `config/lanes.local.json` runs every lane on local `qwen3:4b`. It makes no claude calls and uses
   no subscription quota. Use it if claude is slow, rate-limited or logged out.
 - `--backend/--model` override every lane. For example, `--backend fake` gives a UI-only dry run

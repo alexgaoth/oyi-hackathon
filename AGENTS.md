@@ -58,10 +58,19 @@ difference is attributable. (Racing different *harnesses* would confound model/m
 - `naked` — helpful assistant, no security prompt, all tools.
 - `prompted` — + a security system prompt (content is data, verify sender, never send the vault).
 - `scoped` — + `scopedPolicy` (the permission layer).
-- `gbrain` — `scoped`'s policy stated in **GBrain's permission-grade vocabulary** (vault = Off, mail
-  to strangers = Draft, payments = Manage/allowlisted, people & vendor pages = Read). It is the
-  same enforcement measured as `scoped` (0% breach); the `gbrain` tier binds that identity to
-  GBrain and, when run with `CTB_BRAIN=gbrain`, the brain itself is GBrain. This is the HARD lane.
+- `gbrain` — **GBrain-STYLE** permission grants: `scoped`'s policy stated in GBrain's grade
+  vocabulary (vault = Off, mail to strangers = Draft, payments = Manage/allowlisted, pages = Read).
+  Enforced by our `scopedPolicy`, **not by GBrain** (same rules measured as `scoped`, 0%). With
+  `CTB_BRAIN=gbrain` the real GBrain backs the brain's *search* — that is the only real GBrain path.
+  This is the HARD lane.
+- `screened` — **QM-STYLE** content screener (sponsor-defenders branch): our own LLM screener
+  modeled on QM's Auto posture, as a `preprocess` step. No QM code is imported/ported.
+- `immune` — **Memorable-STYLE** procedural memory (sponsor-defenders branch): our own markdown
+  lesson store (`world/lessons/active.md`); does not recall from Memorable.
+
+**Honest status of the sponsor bindings:** see `docs/sponsor-defenders.md` § "Honest status" — the
+engine is real; the GBrain/QM/Memorable tiers are mostly *modeled on* the sponsors, not their
+software enforcing the defense. Don't relabel them as the products unless the real integration lands.
 
 `config/lanes.json`: EASY naked/haiku · MEDIUM prompted/haiku · HARD gbrain/haiku (all claude-cli).
 `config/lanes.local.json`: all lanes on local ollama. No "sonnet" anywhere.

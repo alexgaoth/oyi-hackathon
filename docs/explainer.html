@@ -179,7 +179,7 @@
       <tbody>
         <tr><td class="live-lane">EASY</td><td>naked</td><td class="why">A helpful assistant with no security instructions and every tool. The control case.</td></tr>
         <tr><td class="live-lane">MEDIUM</td><td>prompted</td><td class="why">A security-aware system prompt: treat message content as data, never as orders; verify the sender; never send the vault out.</td></tr>
-        <tr><td class="live-lane">HARD</td><td>GBrain grants</td><td class="why">The prompt <em>plus</em> <a href="https://gbrain.io" style="color:inherit">GBrain</a>'s permission grants — the part Maya owns. Vault/logins are <em>Off</em> (owner only), mail to strangers is <em>Draft</em>, payments are <em>Manage</em> (allowlisted vendors, in range), her people/vendor pages are <em>Read</em>-only.</td></tr>
+        <tr><td class="live-lane">HARD</td><td>GBrain-style grants</td><td class="why">The prompt <em>plus</em> permission grants <a href="https://gbrain.io" style="color:inherit">modeled on GBrain</a> — the part Maya owns. Vault/logins are <em>Off</em> (owner only), mail to strangers is <em>Draft</em>, payments are <em>Manage</em> (allowlisted vendors, in range), her people/vendor pages are <em>Read</em>-only.</td></tr>
         <tr><td class="soon">screened</td><td>roadmap</td><td class="why">Untrusted content spotlighted and passed through an injection screener before the agent sees it.</td></tr>
         <tr><td class="soon">immune</td><td>roadmap</td><td class="why">The agent learns from every breach — past attacks become procedural memory the next defender already knows.</td></tr>
       </tbody>
@@ -194,7 +194,7 @@
       <div id="bars"></div>
       <div class="chart-note">Lower is better. Utility = the same agent still completing legitimate work — held at 100% on every tier.</div>
     </div>
-    <p class="body" style="margin-top:16px; max-width:66ch">The residue that <em>does</em> get through is <b style="color:var(--amber)">memory poisoning</b> — planting a false fact like a swapped bank detail. It doesn't read as harmful to the model, so it complies, and a security <em>prompt</em> doesn't fix it (MEDIUM still breaches). What closes it is <b style="color:var(--signal)">GBrain's permission grants</b> — the part Maya <em>owns</em> — which simply refuse a write to her protected pages unless the request is the authenticated owner's. Not the model's goodwill, not a prompt: a rule she controls. That's the argument for owning your intelligence, in one bar.</p>
+    <p class="body" style="margin-top:16px; max-width:66ch">The residue that <em>does</em> get through is <b style="color:var(--amber)">memory poisoning</b> — planting a false fact like a swapped bank detail. It doesn't read as harmful to the model, so it complies, and a security <em>prompt</em> doesn't fix it (MEDIUM still breaches). What closes it is <b style="color:var(--signal)">a GBrain-style permission layer</b> — the part Maya <em>owns</em> — which simply refuse a write to her protected pages unless the request is the authenticated owner's. Not the model's goodwill, not a prompt: a rule she controls. That's the argument for owning your intelligence, in one bar.</p>
     <p class="body mut" style="margin-top:16px; font-size:14px">The attack set is <b style="color:var(--text)">49 attacks across 10 families</b> — direct overrides, owner spoofs, invoice fraud, calendar-invite injection, hidden instructions in shared docs, memory poisoning, obfuscated encodings, and worming relays — plus 14 benign tasks, each carrying a machine-checkable proof that a compliant agent really would breach.</p>
   </section>
 
@@ -218,7 +218,7 @@
 $ <span class="c">bun run scripts/demo/check.ts</span>
 <span class="a">all PASS · 6 checks</span>
 
-<span class="d"># start the arena (three lanes: naked · prompted · gbrain grants)</span>
+<span class="d"># start the arena (three lanes: naked · prompted · gbrain-style)</span>
 $ <span class="c">bun run scripts/serve.ts --lanes config/lanes.json</span>
 
 <span class="d"># expose the portal, then open /arena?portal=&lt;url&gt;/attack on the projector</span>
@@ -253,7 +253,7 @@ $ <span class="c">cloudflared tunnel --url http://localhost:4173</span></pre>
     tiers: [
       {lane:"EASY",   defense:"naked",    breachPct:5, utilPct:100},
       {lane:"MEDIUM", defense:"prompted", breachPct:5, utilPct:100},
-      {lane:"HARD",   defense:"gbrain grants", breachPct:0, utilPct:100}
+      {lane:"HARD",   defense:"gbrain-style", breachPct:0, utilPct:100}
     ]
   };
 

@@ -53,18 +53,18 @@ const GBRAIN_NOTE = [
 const naked: Tier = { id: 'naked', label: 'Naked', system: () => BASE_PROMPT };
 const prompted = deriveTier(naked, { id: 'prompted', label: 'Security prompt', extraSystem: SECURITY_PROMPT });
 const scoped = deriveTier(prompted, { id: 'scoped', label: 'Prompt + permissions', extraSystem: SCOPED_PROMPT, policy: scopedPolicy });
-const gbrain = deriveTier(scoped, { id: 'gbrain', label: 'GBrain permission grants', extraSystem: GBRAIN_NOTE });
+const gbrain = deriveTier(scoped, { id: 'gbrain', label: 'GBrain-style permission grants', extraSystem: GBRAIN_NOTE });
 
 // Sponsor defender layers (see docs/sponsor-defenders.md). Each adds ONE real sponsor feature so
 // the ablation stays clean. `screened` = QM's Auto-posture content screener as a preprocess step.
 const screened = deriveTier(prompted, {
-  id: 'screened', label: 'QM content screener', extraSystem: SCREEN_NOTE,
+  id: 'screened', label: 'QM-style content screener', extraSystem: SCREEN_NOTE,
   preprocess: (inbound, env) => screenInbound(inbound, env),
 });
 
 // `immune` = Memorable procedural memory: `prompted` plus the lessons learned from past breaches
 // (loaded fresh each episode so `scripts/learn.ts` can update them at runtime).
-const immune: Tier = { ...prompted, id: 'immune', label: 'Memorable immunity', system: (ctx) => {
+const immune: Tier = { ...prompted, id: 'immune', label: 'Memorable-style immunity', system: (ctx) => {
   const block = lessonsBlock();
   return block ? `${prompted.system(ctx)}\n\n${block}` : prompted.system(ctx);
 } };
