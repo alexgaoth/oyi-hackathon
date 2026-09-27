@@ -132,6 +132,17 @@ Go down one level at a time:
 [docs/gbrain.md](docs/gbrain.md). Startup takes about 14 s. Each search blocks every lane for about
 50 ms, and each re-indexed page for about 0.5 s. Start it early.
 
+**How the audience sees GBrain is real (proof on screen, not a claim):**
+
+- The server log opens with `defender brain: GBrain (commit e78f1c3, MCP search, vault not indexed)`.
+- On the arena, every HARD-lane memory search renders as `search_brain · gbrain -> "<query>"` —
+  the tool chip itself names GBrain, so each call site is visibly GBrain's engine answering.
+- A poisoning attempt on HARD shows the GBrain grant refusal in the step's BLOCKED line, while
+  EASY/MEDIUM show the poisoned write land (the brain indicator flips to POISONED on those lanes).
+- Side-by-side beat: run the same poisoning attack twice, once with `CTB_BRAIN=` unset (markdown
+  brain, write lands) and once with `CTB_BRAIN=gbrain` (write refused). FINDINGS.md's table row
+  for `gbrain` cites the measured 0% breach with 100% utility.
+
 ## River
 
 Placeholder. River setup (the `--backend river` adapter and SFT export for fine-tuning on event

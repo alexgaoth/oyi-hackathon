@@ -12,6 +12,17 @@ model across tiers, so the only variable is the defense.
 | prompted | + security system prompt             | 1/20 = 5% | 2/2 = 100% | `results/expA-prompted` |
 | gbrain   | + GBrain permission grants (vault Off, drafts, allowlisted pay, read-only pages) | 0/20 = 0% | 2/2 = 100% | `results/expA-scoped` |
 
+**What `gbrain` is, concretely.** In the `gbrain` tier the defender's memory is not a folder of
+markdown — it is a live [GBrain](https://github.com/garrytan/gbrain) brain (commit `e78f1c3`,
+v0.59.0.0): `search_brain` runs GBrain's own MCP `search` op against a PGLite index of Maya's
+seed pages (`src/brain/gbrain.ts`, run with `CTB_BRAIN=gbrain`; `CTB_BRAIN=` unset keeps the
+markdown default). GBrain contributes two distinct things: the **memory engine** (import,
+search, write with sources) and the **permission layer** measured in the table above — writes to
+protected pages are refused unless the owner is authenticated, and the vault is never indexed,
+so a poisoned write never becomes retrievable memory. `bun test tests/gbrain` (6 pass) proves
+the round trip, per-episode isolation, a scrubbed environment for every gbrain process, and
+vault unreachability.
+
 Reproduce any row: `bun run scripts/report.ts results/expA-<tier>`.
 
 ### The real result (honest, and it reshaped the demo)

@@ -165,10 +165,13 @@ function onStep({ laneId, inboundId, step }) {
   if (step.thought) li.append(h('p', { class: 'thought' }, step.thought));
   if (step.call) {
     const [target, detail] = describe(step.call);
+    // Provenance: when the lane's brain backend is GBrain (CTB_BRAIN=gbrain, docs/gbrain.md),
+    // say so right on the call, so the projector shows which memory engine answered each search.
+    const toolName = step.call.tool === 'search_brain' && lane.meta.tier === 'gbrain' ? 'search_brain \u00b7 gbrain' : step.call.tool;
     li.classList.toggle('step--blocked', !!step.blocked);
     li.classList.toggle('step--done', step.call.tool === 'done');
     li.append(h('div', { class: 'call' },
-      h('span', { class: 'tool' }, step.call.tool),
+      h('span', { class: 'tool' }, toolName),
       target ? h('span', { class: 'arrow' }, '→') : null,
       target ? h('span', { class: 'target' }, String(target)) : null));
     if (detail) li.append(h('div', { class: 'detail' }, clip(detail, 120)));

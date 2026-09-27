@@ -20,6 +20,7 @@ import { claudeLimiter } from '../src/llm';
 import { Arena } from '../src/server/arena';
 import { startServer } from '../src/server/http';
 import { LANE_DEFAULTS, loadLanes, overrideLanes } from '../src/server/lanes';
+import { GBRAIN_COMMIT } from '../src/brain/gbrain';
 import { defaultLLMFactory } from '../src/server/llm';
 import { assignLanes, loadRun, type ReplayEpisode } from '../src/server/replay';
 
@@ -80,6 +81,9 @@ process.on('SIGINT', shutdown);
 process.on('SIGTERM', shutdown);
 
 console.log(`arena  ${app.url}/arena\nportal ${app.url}/attack`);
+if (process.env.CTB_BRAIN === 'gbrain') {
+  console.log(`defender brain: GBrain (commit ${GBRAIN_COMMIT.slice(0, 7)}, MCP search, vault not indexed)`);
+}
 for (const l of lanes) {
   const plan = replayPlan
     ? ` · replaying ${replayPlan.get(l.id)?.length ?? 0} episodes`
