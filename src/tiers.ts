@@ -2,6 +2,7 @@
 // (system prompt, how the inbound item is rendered), what it sees (optional pre-processing) and
 // which permission policy guards its tool calls. New tiers: build on an existing one with
 // deriveTier and add them to TIERS.
+import { screenInbound, SCREEN_NOTE } from './defenses/screener';
 import type { LLM } from './llm';
 import { scopedPolicy, type Policy } from './policy';
 import { BASE_PROMPT, SCOPED_PROMPT, SECURITY_PROMPT } from './prompts';
@@ -53,7 +54,14 @@ const prompted = deriveTier(naked, { id: 'prompted', label: 'Security prompt', e
 const scoped = deriveTier(prompted, { id: 'scoped', label: 'Prompt + permissions', extraSystem: SCOPED_PROMPT, policy: scopedPolicy });
 const gbrain = deriveTier(scoped, { id: 'gbrain', label: 'GBrain permission grants', extraSystem: GBRAIN_NOTE });
 
-export const TIERS: Record<string, Tier> = { naked, prompted, scoped, gbrain };
+// Sponsor defender layers (see docs/sponsor-defenders.md). Each adds ONE real sponsor feature so
+// the ablation stays clean. `screened` = QM's Auto-posture content screener as a preprocess step.
+const screened = deriveTier(prompted, {
+  id: 'screened', label: 'QM content screener', extraSystem: SCREEN_NOTE,
+  preprocess: (inbound, env) => screenInbound(inbound, env),
+});
+
+export const TIERS: Record<string, Tier> = { naked, prompted, scoped, gbrain, screened };
 
 export function getTier(id: string): Tier {
   const tier = TIERS[id];
