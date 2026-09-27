@@ -448,20 +448,31 @@ function renderMd(md, root) {
 }
 const dossier = $('dossier');
 let dossierLoaded = false;
-dossier?.addEventListener('toggle', async () => {
-  if (!dossier.open || dossierLoaded) return;
-  dossierLoaded = true;
+async function loadDossier() {
   const body = $('dossier-body');
   try {
     const r = await fetch('/api/scenario');
     const d = await r.json();
     if (!d.markdown) throw new Error('empty');
     renderMd(d.markdown, body);
+    dossierLoaded = true;
   } catch {
-    dossierLoaded = false; // let a retry happen on next open
     body.replaceChildren(Object.assign(document.createElement('p'), { className: 'd-loading', textContent: "Couldn't load the target's file — the server may be offline. Try again." }));
   }
-});
+}
+function openDossier() {
+  dossier.hidden = false;
+  document.body.classList.add('sheet-open');
+  dossier.querySelector('.ds-scroll').scrollTop = 0;
+  if (!dossierLoaded) loadDossier();
+}
+function closeDossier() {
+  dossier.hidden = true;
+  document.body.classList.remove('sheet-open');
+}
+$('dossier-open')?.addEventListener('click', openDossier);
+$('dossier-close')?.addEventListener('click', closeDossier);
+document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && dossier && !dossier.hidden) closeDossier(); });
 
 for (const b of document.querySelectorAll('.chip[data-preset]')) {
   b.addEventListener('click', () => {

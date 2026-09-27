@@ -332,3 +332,53 @@ textarea { resize: vertical; min-height: 104px; line-height: 1.4; }
 }
 .chip:active { background: var(--glass-strong); color: var(--text); }
 .field--pair { margin-top: 0; }
+
+/* ── target dossier: trigger + full-screen intel-file overlay ── */
+.dossier-open { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; padding: 13px 15px; border-radius: 14px; cursor: pointer; color: var(--text); -webkit-tap-highlight-color: transparent; }
+.dossier-open .do-tag { font-family: var(--mono); font-size: 10px; letter-spacing: 0.16em; color: var(--bg); background: var(--warn); padding: 4px 7px; border-radius: 5px; font-weight: 800; flex: none; }
+.dossier-open .do-main { display: flex; flex-direction: column; gap: 2px; flex: 1; min-width: 0; }
+.dossier-open .do-main b { font-size: 15px; font-weight: 700; }
+.dossier-open .do-main small { font-size: 12px; color: var(--dim); }
+.dossier-open .do-go { font-size: 22px; color: var(--dim); flex: none; }
+.dossier-open:active { transform: scale(0.99); }
+
+body.sheet-open { overflow: hidden; }
+.dossier-sheet {
+  position: fixed; inset: 0; z-index: 90;
+  display: flex; flex-direction: column;
+  background:
+    radial-gradient(120% 60% at 50% -10%, rgba(255, 176, 32, 0.10), transparent 60%),
+    var(--bg-2);
+  animation: sheetin 0.22s ease;
+}
+@keyframes sheetin { from { opacity: 0; transform: translateY(10px); } }
+@media (prefers-reduced-motion: reduce) { .dossier-sheet { animation: none; } }
+
+.ds-bar {
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  padding: calc(14px + env(safe-area-inset-top, 0px)) 16px 12px;
+  border-bottom: 1px solid var(--line-2);
+  background: rgba(5, 7, 11, 0.7); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+}
+.ds-id { display: flex; align-items: baseline; gap: 10px; min-width: 0; }
+.ds-tag { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.18em; color: var(--warn); border: 1px solid var(--warn); padding: 3px 7px; border-radius: 5px; flex: none; }
+.ds-subject { font-family: var(--sans); font-size: 20px; font-weight: 800; letter-spacing: -0.01em; }
+.ds-close { flex: none; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line-2); background: var(--panel-2); color: var(--text-2); font-size: 16px; cursor: pointer; }
+.ds-close:active { transform: scale(0.94); }
+
+.ds-scroll { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 0 18px calc(28px + env(safe-area-inset-bottom, 0px)); }
+.ds-strip { display: flex; justify-content: space-between; gap: 12px; max-width: 40rem; margin: 14px auto 4px; font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 8px 2px; }
+.ds-strip span:first-child { color: var(--breach); }
+
+/* the file itself — editorial, readable */
+.dossier-body { max-width: 40rem; margin: 0 auto; font-family: var(--sans); font-size: 16.5px; line-height: 1.72; color: var(--text-2); }
+.dossier-body p { margin: 14px 0 0; }
+.dossier-body p:first-child { margin-top: 20px; }
+.dossier-body b { color: var(--text); font-weight: 700; }
+.dossier-body code { font-family: var(--mono); font-size: 13.5px; color: var(--text); background: rgba(255, 255, 255, 0.06); padding: 1px 6px; border-radius: 5px; word-break: break-all; }
+.dossier-body h2 { font-family: var(--mono); font-size: 12px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--warn); font-weight: 500; margin: 30px 0 2px; padding-top: 16px; border-top: 1px solid var(--line); }
+.dossier-body ul { margin: 8px 0 0; padding: 0; list-style: none; }
+.dossier-body li { position: relative; margin: 10px 0 0; padding-left: 20px; }
+.dossier-body li::before { content: ""; position: absolute; left: 4px; top: 0.72em; width: 6px; height: 6px; border-radius: 1px; background: var(--warn); }
+.dossier-body .d-loading { color: var(--dim); font-style: italic; }
+.ds-scroll .d-note { max-width: 40rem; margin: 24px auto 0; padding: 14px 16px; border: 1px solid var(--line-2); border-left: 3px solid var(--info); border-radius: 0 10px 10px 0; background: var(--panel); color: var(--text-2); font-size: 14px; line-height: 1.6; }
