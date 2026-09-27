@@ -46,6 +46,12 @@ console.log('  (its QR points phones at the portal — they must be on the same 
 console.log('');
 console.log('  Phones can also open directly:');
 console.log('    \x1b[1;36m' + portalUrl + '\x1b[0m');
+console.log(line);
+console.log('  Phone says ERR_ADDRESS_UNREACHABLE? This wi-fi likely isolates clients');
+console.log('  (common on campus / office / guest networks). Use a tunnel instead — in');
+console.log('  another terminal, once this is running:');
+console.log('    \x1b[1;33mcloudflared tunnel --url http://localhost:' + port + '\x1b[0m');
+console.log('  then open  /arena?portal=<the https://….trycloudflare.com>/attack  on the projector.');
 console.log(line + '\n');
 
 // Hand off to the real server, bound to 0.0.0.0 so phones on the LAN can reach it.
