@@ -291,3 +291,44 @@ textarea { resize: vertical; min-height: 104px; line-height: 1.4; }
 .ta-item small { color: var(--dim); font-size: 12px; text-align: right; }
 .ta-item.active, .ta-item:hover { background: rgba(255, 255, 255, 0.08); }
 .whoami { font-size: 13px; color: var(--easy); font-weight: 700; letter-spacing: 0.02em; }
+
+/* ── spoof details + preset chips ─────────────────────────── */
+.spoof {
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(1.6);
+  backdrop-filter: blur(var(--blur)) saturate(1.6);
+  overflow: hidden;
+}
+.spoof > summary {
+  display: flex; align-items: center; gap: 8px;
+  padding: 12px 14px;
+  font-size: 13.5px; font-weight: 800; letter-spacing: 0.04em;
+  color: var(--text-2);
+  cursor: pointer;
+  list-style: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.spoof > summary::-webkit-details-marker { display: none; }
+.spoof > summary::after { content: '›'; margin-left: auto; font-size: 18px; color: var(--dim); transition: transform 0.2s; }
+.spoof[open] > summary::after { transform: rotate(90deg); }
+.spoof-body { display: flex; flex-direction: column; gap: 11px; padding: 0 14px 14px; }
+.dossier-tag { color: var(--breach); font-size: 11px; font-weight: 900; letter-spacing: 0.14em; }
+
+.presets { display: flex; flex-wrap: wrap; gap: 7px; }
+.chip {
+  padding: 8px 13px;
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: var(--text-2);
+  font: inherit; font-size: 13.5px; font-weight: 700;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background 0.15s, color 0.15s;
+}
+.chip:active { background: var(--glass-strong); color: var(--text); }
+.field--pair { margin-top: 0; }

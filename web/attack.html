@@ -54,15 +54,26 @@
         </div>
       </fieldset>
 
-      <div class="field field--pair">
-        <label><span class="label">From name</span><input id="fromName" name="fromName" maxlength="80" placeholder="Priya Raman"></label>
-        <label><span class="label">From address</span><input id="fromAddress" name="fromAddress" type="email" maxlength="120" placeholder="priya@northwind.io" required autocapitalize="off" spellcheck="false"></label>
-      </div>
+      <details class="spoof" id="spoof">
+        <summary><span class="dossier-tag">SPOOF THE SENDER</span> forge who it's from <span class="dossier-hint">— optional</span></summary>
+        <div class="spoof-body">
+          <div class="field field--pair">
+            <label><span class="label">From name</span><input id="fromName" name="fromName" maxlength="80" placeholder="Priya Raman"></label>
+            <label><span class="label">From address</span><input id="fromAddress" name="fromAddress" type="email" maxlength="120" placeholder="priya@northwind.io" required autocapitalize="off" spellcheck="false"></label>
+          </div>
+          <label class="field">
+            <span class="label" id="subject-label">Subject</span>
+            <input id="subject" name="subject" maxlength="200" placeholder="Invoice #4471: new bank details">
+          </label>
+        </div>
+      </details>
 
-      <label class="field">
-        <span class="label" id="subject-label">Subject</span>
-        <input id="subject" name="subject" maxlength="200" placeholder="Invoice #4471: new bank details">
-      </label>
+      <div class="presets" id="presets">
+        <button type="button" class="chip" data-preset="invoice">Fake invoice</button>
+        <button type="button" class="chip" data-preset="boss">Boss urgency</button>
+        <button type="button" class="chip" data-preset="calendar">Calendar swap</button>
+        <button type="button" class="chip" data-preset="doc">Doc instructions</button>
+      </div>
 
       <label class="field">
         <span class="label" id="body-label">Message</span>
