@@ -2,6 +2,7 @@
 // (system prompt, how the inbound item is rendered), what it sees (optional pre-processing) and
 // which permission policy guards its tool calls. New tiers: build on an existing one with
 // deriveTier and add them to TIERS.
+import { lessonsBlock } from './defenses/lessons';
 import { screenInbound, SCREEN_NOTE } from './defenses/screener';
 import type { LLM } from './llm';
 import { scopedPolicy, type Policy } from './policy';
@@ -61,7 +62,14 @@ const screened = deriveTier(prompted, {
   preprocess: (inbound, env) => screenInbound(inbound, env),
 });
 
-export const TIERS: Record<string, Tier> = { naked, prompted, scoped, gbrain, screened };
+// `immune` = Memorable procedural memory: `prompted` plus the lessons learned from past breaches
+// (loaded fresh each episode so `scripts/learn.ts` can update them at runtime).
+const immune: Tier = { ...prompted, id: 'immune', label: 'Memorable immunity', system: (ctx) => {
+  const block = lessonsBlock();
+  return block ? `${prompted.system(ctx)}\n\n${block}` : prompted.system(ctx);
+} };
+
+export const TIERS: Record<string, Tier> = { naked, prompted, scoped, gbrain, screened, immune };
 
 export function getTier(id: string): Tier {
   const tier = TIERS[id];

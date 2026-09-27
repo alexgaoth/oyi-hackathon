@@ -169,3 +169,31 @@ works with no wifi and no quota. The live path is the headline; replay is the fa
 GBrain (brain storage/search via local `gbrain` CLI, PGLite), QM (port its content screener,
 MIT, attributed), Memorable (`memorable-cli` for lesson extraction if it runs locally),
 River (OpenAI-compatible adapter + SFT export ready for event credits).
+
+## Sponsor challenge brief (owner-provided 2026-09-27 21:15 UTC)
+
+Goal: extend QM and GBrain; push further with River AI, Memorable, Superset and UFO.
+Rules: build something using GBrain; no prebuilt projects / forks of existing projects;
+must build during hackathon hours. Prizes: grand prize YC interview + 1:1 with Garry +
+$5000; 2nd $2000; 3rd $1000.
+
+- **River AI** (river.ai/own-your-intelligence-hackathon): API to train your own LLMs on open
+  weights. 50k/25k/15k API credits + team dinner. Challenge: best custom LLM/agent trained
+  with the River API. → Hook: items 11/19 (SFT export from attack/task traces), fine-tune
+  at the event on River credits.
+- **Gbrain.IO** (gbrain.io/gratis/own-your-intelligence): credits + signed hats. Challenge:
+  automate a tedious task with GBrain. → Hook: item 10 (GBrain-backed brain), the
+  defender's memory runs on GBrain.
+- **UFO** (ufo.ai): all attendees get $100 credits; unlimited lifetime access award.
+  Challenges: best new extension + best automation for startups. → Hook: this workspace
+  drives the defender as operator (portal attacks, lane iteration, eval runs).
+- **Memorable** (memorable.sh): pro, jackets, AirPods, $500/$250/$100. Challenge: most
+  interesting use of Memorable. → Hook: item 8 (immune memory / lesson extraction via
+  `memorable-cli`).
+- **QM** (qm.ycombinator.com): Mac mini. Challenge: extend QM most impressively. → Hook:
+  port QM's content screener as the `screened` tier (item 7).
+- **Superset** (superset.sh): AirPods Max + 1y Superset Pro. Challenge: use Superset to make
+  any project and preset it in a Superset page. → Hook: open (no mapped item yet).
+
+Coverage: GBrain rule satisfied (item 10, brain is core to the product); River, QM,
+Memorable, UFO each mapped; Superset is the only unclaimed sponsor.
