@@ -417,6 +417,12 @@ server = Bun.serve<WsData>({
       runPortalAttack(parsed.laneId, parsed.item);
       return Response.json({ inboundId: parsed.item.id });
     }
+    if (url.pathname === '/api/attendees') {
+      try {
+        const raw = JSON.parse(await Bun.file(join(import.meta.dir, '..', 'world', 'attendees.json')).text());
+        return Response.json(Array.isArray(raw) ? raw : raw.attendees ?? []);
+      } catch { return Response.json([], { status: 200 }); }
+    }
     if (req.method !== 'GET' && req.method !== 'HEAD') return new Response('method not allowed', { status: 405 });
     return serveStatic(WEB, url.pathname, PAGES);
   },
