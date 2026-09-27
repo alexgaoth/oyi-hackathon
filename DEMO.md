@@ -36,7 +36,20 @@ change it, change it in every command.
       on the projector and reach a verdict.
 - [ ] Keep a third terminal ready with the replay command.
 
-## Start live
+## Local, one command (same wi-fi)
+
+The simplest room setup — no tunnel, no cloud. Everyone on the same wi-fi:
+
+```bash
+bun run scripts/demo/go.ts --lanes config/lanes.json
+```
+
+It finds this laptop's LAN address, starts the server bound to it, and prints the exact
+**projector URL** (with the phone portal already baked into its on-screen QR) and the direct
+**portal URL**. Open the projector URL full-screen; phones scan the QR and land on the live
+attack console. Add `--backend fake` for a no-LLM dry run.
+
+## Start live (manual / tunnel)
 
 ```bash
 bun run scripts/serve.ts --lanes config/lanes.json --host 0.0.0.0 --port 4173
@@ -45,7 +58,12 @@ bun run scripts/serve.ts --lanes config/lanes.json --host 0.0.0.0 --port 4173
 - `--host 0.0.0.0` is only needed when phones reach the laptop directly over the LAN, without the
   tunnel. With cloudflared, the default `--host 127.0.0.1` is enough and safer:
   `bun run scripts/serve.ts --lanes config/lanes.json --port 4173`.
-- `config/lanes.json` is the headline configuration: EASY naked/qwen3:4b (ollama), MEDIUM
+- The **attack portal** (`/attack`) is a live console: it follows the attacker's own message
+  through the running agent and narrates it in real time — the agent's actual reasoning, each tool
+  call, any "DEFENSE ENGAGED" block, a live "agent is deciding… Ns" timer, target telemetry
+  (vault/ledger/memory/contacts) reacting, and a BREACHED (with proof + points) / DEFENDED verdict.
+  It is driven entirely by the live event stream, so it is a real attack, not a replay.
+- `config/lanes.json` is the headline configuration: EASY naked/haiku, MEDIUM
   prompted/haiku, HARD scoped/sonnet (claude-cli).
 - `config/lanes.local.json` runs every lane on local `qwen3:4b`. It makes no claude calls and uses
   no subscription quota. Use it if claude is slow, rate-limited or logged out.
