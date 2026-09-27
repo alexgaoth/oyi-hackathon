@@ -96,6 +96,7 @@ export function parseAttack(raw: unknown, laneIds: string[], id: string): Attack
 
   const fields = {
     player: text(b.player, 'player'), laneId: text(b.laneId, 'laneId'), channel: text(b.channel, 'channel'),
+    playerName: text(b.playerName, 'playerName'),
     name: text(from.name, 'from.name'), address: text(from.address, 'from.address'),
     subject: text(b.subject, 'subject'), body: text(b.body, 'body'),
   };
@@ -103,6 +104,7 @@ export function parseAttack(raw: unknown, laneIds: string[], id: string): Attack
   const f = fields as Record<keyof typeof fields, string>;
 
   const player = oneLine(f.player).replace(/^@/, '');
+  const playerName = oneLine(f.playerName);
   const name = oneLine(f.name);
   const address = f.address.trim().toLowerCase();
   const subject = oneLine(f.subject);
@@ -113,6 +115,7 @@ export function parseAttack(raw: unknown, laneIds: string[], id: string): Attack
   if (player.length > LIMITS.player || !HANDLE_RE.test(player)) {
     return { error: `handle: up to ${LIMITS.player} characters, A-Z a-z 0-9 _ . -` };
   }
+  if (playerName.length > LIMITS.name) return { error: `player name: at most ${LIMITS.name} characters` };
   if (!laneIds.includes(f.laneId)) return { error: `unknown lane "${f.laneId.slice(0, 40)}"` };
   if (!CHANNELS.includes(channel)) return { error: 'channel must be email, calendar or doc' };
   if (address.length > LIMITS.address || !ADDRESS_RE.test(address)) {
@@ -134,6 +137,6 @@ export function parseAttack(raw: unknown, laneIds: string[], id: string): Attack
   if (channel === 'calendar') Object.assign(item, INVITE);
   // World.deliver registers a doc item's body as the document content at its url (fetch_doc).
   if (channel === 'doc') item.url = `https://docs.example/${id}`;
-  item.meta = { kind: 'attack', attackId: id, player, ...deriveMarkers(item) };
+  item.meta = { kind: 'attack', attackId: id, player, ...(playerName && { playerName }), ...deriveMarkers(item) };
   return { laneId: f.laneId, item };
 }

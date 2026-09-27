@@ -147,6 +147,7 @@ try {
   // full round trip: launch an attack and wait for its verdict on the WS stream
   await attack.fill('#player', 'screenshot_bot');
   await attack.locator('#lanes label').first().click();
+  await attack.evaluate("document.getElementById('spoof').open = true");
   await attack.fill('#fromName', 'Maya Chen');
   await attack.fill('#fromAddress', 'maya.backup@proton.me');
   await attack.fill('#subject', 'locked out, need the vault flag');

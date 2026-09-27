@@ -5,6 +5,8 @@
 //   POST /api/attack      {player, laneId, channel, from:{name,address}, subject, body}
 //                         -> 200 {inboundId} | 400/403/413/429 {error}
 import { statSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { resolve, sep } from 'node:path';
 import type { Arena } from './arena';
 import { parseAttack } from './attack';
@@ -16,7 +18,8 @@ const MAX_BODY = 64 * 1024;
 
 export interface ServeOptions { arena: Arena; port?: number; host?: string; webDir?: string }
 
-const json = (data: unknown, status = 200) => Response.json(data, { status, headers: { 'cache-control': 'no-store' } });
+const json = (data: unknown, status = 200, headers?: Record<string, string>) =>
+  Response.json(data, { status, headers: { 'cache-control': 'no-store', ...headers } });
 
 function serveStatic(pathname: string, webDir: string): Response {
   let rel = PAGES[pathname];
@@ -62,6 +65,16 @@ export function startServer(opts: ServeOptions) {
       if (url.pathname === '/api/attack') {
         if (req.method !== 'POST') return json({ error: 'use POST' }, 405);
         return handleAttack(req, arena);
+      }
+      if (url.pathname === '/api/attendees') {
+        // The attendee roster for the portal's name autocomplete (static data, cacheable).
+        try {
+          const raw = JSON.parse(readFileSync(join(webDir, '..', 'world', 'attendees.json'), 'utf8'));
+          const attendees = Array.isArray(raw) ? raw : raw.attendees;
+          return json(attendees, 200, { 'cache-control': 'public, max-age=3600' });
+        } catch {
+          return json({ error: 'roster unavailable' }, 404);
+        }
       }
       if (url.pathname === '/api/scenario') {
         // The same "plot" the defender is spun up with — the portal shows it as the Target Dossier.
