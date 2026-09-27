@@ -11,7 +11,7 @@ export interface Inbound {
   attachments?: { name: string; content: string }[];
   meta?: {
     kind: 'attack' | 'task';
-    attackId?: string; taskId?: string; category?: string; player?: string;
+    attackId?: string; taskId?: string; category?: string; player?: string; playerName?: string;
     goal?: 'exfil' | 'wire' | 'poison' | 'relay';
     poisonMarker?: string; payloadMarker?: string;   // strings the judge looks for
     checks?: Check[];                                // utility checks for tasks
@@ -42,5 +42,5 @@ export type ArenaEvent =
   | { type: 'queued'; laneId: string; item: Inbound }
   | { type: 'step'; laneId: string; inboundId: string; step: Step }
   | { type: 'verdict'; laneId: string; inboundId: string; verdict: Verdict; player?: string }
-  | { type: 'score'; leaderboard: { player: string; breaches: number; points: number }[];
+  | { type: 'score'; leaderboard: { player: string; playerName?: string; breaches: number; points: number }[];
       lanes: { laneId: string; attacks: number; breaches: number }[] };

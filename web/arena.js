@@ -322,7 +322,7 @@ function onScore({ leaderboard = [], lanes: laneStats = [] }) {
   ol.replaceChildren(...rows.map((r, i) => {
     const li = h('li', {},
       h('span', { class: 'rank' }, String(i + 1)),
-      h('span', { class: 'player' }, '@' + r.player),
+      h('span', { class: 'player' }, r.playerName ?? '@' + r.player),
       h('span', { class: 'bcount' }, String(r.breaches)),
       h('span', { class: 'points' }, r.points.toLocaleString('en-US')));
     if (performance.now() > replayUntil && lastPoints.get(r.player) < r.points) li.classList.add('bump');

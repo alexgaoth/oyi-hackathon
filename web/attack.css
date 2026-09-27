@@ -248,3 +248,25 @@ textarea { resize: vertical; min-height: 104px; line-height: 1.4; }
 .dossier-body code { font-family: var(--mono); font-size: 12.5px; color: var(--text); }
 .dossier-body .d-loading { color: var(--dim); font-style: italic; }
 .dossier > .d-note { margin: 0; padding: 12px 16px 16px; border-top: 1px solid var(--line); color: var(--text-2); font-size: 13px; line-height: 1.55; }
+
+/* ── attendee autocomplete + whoami ───────────────────────── */
+.handle { position: relative; }
+.typeahead {
+  position: absolute; top: calc(100% + 4px); left: 0; right: 0; z-index: 20;
+  border: 1px solid var(--line-2);
+  border-radius: 12px;
+  background: rgba(14, 19, 28, 0.92);
+  backdrop-filter: blur(20px) saturate(1.5);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+.ta-item {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 8px;
+  padding: 11px 12px;
+  font-size: 15px;
+  cursor: pointer;
+}
+.ta-item + .ta-item { border-top: 1px solid var(--line); }
+.ta-item small { color: var(--dim); font-size: 12px; text-align: right; }
+.ta-item.active, .ta-item:hover { background: rgba(255, 255, 255, 0.08); }
+.whoami { font-size: 13px; color: var(--easy); font-weight: 700; letter-spacing: 0.02em; }

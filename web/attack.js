@@ -18,6 +18,9 @@ let lanes = [];
 let pending = null; // { inboundId, laneId, player }
 const early = new Map(); // inboundId -> events seen before the POST response arrived
 let lastScore = null;
+let roster = [];        // [{name, role?, extra?}] from /api/attendees
+let pickedName = null;  // display name confirmed from the roster
+let activeIdx = -1;
 let deciding = null; // timer handle for the "agent is deciding…" latency cue
 let t0 = 0;
 
@@ -33,6 +36,100 @@ const money = (n) => (typeof n === 'number' ? '$' + n.toLocaleString('en-US') : 
 for (const span of document.querySelectorAll('[data-icon]')) span.insertAdjacentHTML('afterbegin', icon(span.dataset.icon));
 launch.insertAdjacentHTML('afterbegin', icon('bolt'));
 $('player').value = store.get('ctb.player') ?? '';
+pickedName = store.get('ctb.playerName') ?? null;
+renderWhoAmI();
+
+// ── attendee autocomplete ────────────────────────────────────
+const NAME_TOKEN = (n) => n.toLowerCase().replace(/[^a-z ()\u00c0-\u024f]/g, ' ').split(/\s+/).filter(Boolean);
+function scoreName(list, q) {
+  // q: lowercased query. Rank: prefix > word-prefix > substring, across all tokens (incl. nicknames).
+  let best = -1;
+  for (const tok of NAME_TOKEN(list.name)) {
+    if (tok.startsWith(q)) best = Math.max(best, 0);
+    else if (tok.includes(q)) best = Math.max(best, 1);
+  }
+  if (best < 0 && list.name.toLowerCase().replace(/[^a-z]/g, '').includes(q.replace(/ /g, ''))) best = 2;
+  return best;
+}
+function suggest(q) {
+  if (q.length < 2) return [];
+  return roster
+    .map((r) => ({ r, s: scoreName(r, q) }))
+    .filter((x) => x.s >= 0)
+    .sort((a, b) => a.s - b.s || a.r.name.localeCompare(b.r.name))
+    .slice(0, 8)
+    .map((x) => x.r);
+}
+function handleFor(name) {
+  const toks = name.replace(/[(),]/g, ' ').split(/\s+/).filter(Boolean);
+  const first = (toks[0] ?? 'hacker').toLowerCase().replace(/[^a-z0-9]/g, '');
+  const lastInit = toks.length > 1 ? (toks[toks.length - 1][0] ?? '').toLowerCase().replace(/[^a-z0-9]/g, '') : '';
+  return (first + lastInit).slice(0, 20) || 'hacker';
+}
+const listEl = $('player-list');
+function closeList() { listEl.hidden = true; $('player').setAttribute('aria-expanded', 'false'); activeIdx = -1; }
+function openList(items) {
+  listEl.replaceChildren(...items.map((r, i) => {
+    const li = document.createElement('div');
+    li.className = 'ta-item'; li.role = 'option'; li.dataset.idx = String(i);
+    const b = document.createElement('b'); b.textContent = r.name;
+    li.append(b);
+    if (r.extra) { const sm = document.createElement('small'); sm.textContent = r.extra; li.append(sm); }
+    return li;
+  }));
+  listEl.hidden = false;
+  $('player').setAttribute('aria-expanded', 'true');
+  activeIdx = -1;
+}
+function pick(r) {
+  pickedName = r.name;
+  store.set('ctb.playerName', r.name);
+  const h = handleFor(r.name);
+  let uniq = h, n = 2;
+  while (roster.some((x) => x.name !== r.name && handleFor(x.name) === uniq)) uniq = h + n++;
+  $('player').value = uniq;
+  store.set('ctb.player', uniq);
+  renderWhoAmI();
+  closeList();
+}
+function renderWhoAmI() {
+  const el = $('whoami');
+  if (pickedName) { el.textContent = `Playing as ${pickedName}`; el.hidden = false; }
+  else el.hidden = true;
+}
+const playerInput = $('player');
+playerInput.addEventListener('input', () => {
+  pickedName = null; store.set('ctb.playerName', '');
+  renderWhoAmI();
+  const q = playerInput.value.trim().toLowerCase().replace(/^@/, '');
+  const items = suggest(q);
+  if (!items.length) return closeList();
+  openList(items);
+});
+playerInput.addEventListener('keydown', (e) => {
+  if (listEl.hidden) return;
+  const items = [...listEl.querySelectorAll('.ta-item')];
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    e.preventDefault();
+    activeIdx = e.key === 'ArrowDown' ? (activeIdx + 1) % items.length : (activeIdx - 1 + items.length) % items.length;
+    items.forEach((el, i) => el.classList.toggle('active', i === activeIdx));
+  } else if (e.key === 'Enter' && activeIdx >= 0) {
+    e.preventDefault();
+    const r = roster.find((x) => x.name === items[activeIdx].querySelector('b').textContent);
+    if (r) pick(r);
+  } else if (e.key === 'Escape') closeList();
+});
+listEl.addEventListener('pointerdown', (e) => {
+  const li = e.target.closest('.ta-item');
+  if (!li) return;
+  e.preventDefault();
+  const r = roster.find((x) => x.name === li.querySelector('b').textContent);
+  if (r) pick(r);
+});
+document.addEventListener('pointerdown', (e) => { if (!e.target.closest('.handle') && !e.target.closest('#player-list')) closeList(); });
+fetch('/api/attendees').then((r) => (r.ok ? r.json() : []))
+  .then((d) => { roster = Array.isArray(d) ? d : []; })
+  .catch(() => { roster = []; });
 
 function applyChannelCopy() {
   const [subject, body, placeholder] = COPY[form.channel.value];
@@ -87,7 +184,7 @@ form.addEventListener('submit', async (e) => {
       method: 'POST',
       headers: { 'content-type': 'application/json' },
       body: JSON.stringify({
-        player, laneId,
+        player, playerName: pickedName ?? undefined, laneId,
         channel: form.channel.value,
         from: { name: $('fromName').value.trim(), address },
         subject: $('subject').value.trim(),

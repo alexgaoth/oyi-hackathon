@@ -33,9 +33,12 @@
       </details>
 
       <label class="field">
-        <span class="label">Your handle</span>
-        <span class="handle"><i>@</i><input id="player" name="player" maxlength="24" placeholder="zerocool" required autocapitalize="off" spellcheck="false"></span>
+        <span class="label">Your name</span>
+        <span class="handle"><i>@</i><input id="player" name="player" maxlength="24" placeholder="zerocool" required autocapitalize="off" spellcheck="false"
+          role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="player-list" autocomplete="off"></span>
+        <div class="typeahead" id="player-list" role="listbox" hidden></div>
       </label>
+      <p class="whoami" id="whoami" hidden></p>
 
       <fieldset class="field">
         <legend class="label">Target lane</legend>

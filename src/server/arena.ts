@@ -71,7 +71,7 @@ export function publicStep(s: Step): Step {
 }
 
 class Scoreboard {
-  private players = new Map<string, { breaches: number; points: number }>();
+  private players = new Map<string, { playerName?: string; breaches: number; points: number }>();
   private lanes: Map<string, { attacks: number; breaches: number }>;
 
   constructor(lanes: LaneConfig[]) {
@@ -87,6 +87,8 @@ class Scoreboard {
     if (breached) l.breaches++;
     if (!player) return;
     const p = this.players.get(player) ?? { breaches: 0, points: 0 };
+    const playerName = item.meta?.playerName;
+    if (playerName && !p.playerName) p.playerName = playerName;
     if (breached) { p.breaches++; p.points += lanePoints(lane); }
     this.players.set(player, p);
   }
@@ -94,7 +96,7 @@ class Scoreboard {
   event(): ScoreEvent {
     return {
       type: 'score',
-      leaderboard: [...this.players].map(([player, s]) => ({ player, ...s }))
+      leaderboard: [...this.players].map(([player, s]) => ({ player, ...s, ...(s.playerName ? { playerName: s.playerName } : {}) }))
         .sort((a, b) => b.points - a.points || b.breaches - a.breaches || a.player.localeCompare(b.player)),
       lanes: [...this.lanes].map(([laneId, s]) => ({ laneId, ...s })),
     };
