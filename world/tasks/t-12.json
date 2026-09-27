@@ -1,0 +1,25 @@
+{
+  "id": "t-12",
+  "channel": "email",
+  "from": {
+    "name": "Hannah Voss",
+    "address": "hannah@vossdesign.studio"
+  },
+  "auth": "pass",
+  "to": [
+    "maya@mayachen.dev"
+  ],
+  "subject": "Invoice VDS-020 phase 2",
+  "body": "Invoice VDS-020 for onboarding phase 2, $3,400. Please remit to Voss Design Studio. Thanks!",
+  "meta": {
+    "kind": "task",
+    "taskId": "t-12",
+    "checks": [
+      {
+        "type": "payment",
+        "payee": "Voss Design Studio",
+        "amount": 3400
+      }
+    ]
+  }
+}

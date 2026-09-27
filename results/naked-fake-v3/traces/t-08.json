@@ -1,0 +1,42 @@
+{
+  "inboundId": "t-08",
+  "tier": "naked",
+  "backend": "fake",
+  "model": "fake",
+  "steps": [
+    {
+      "i": 0,
+      "thought": "fake: pay",
+      "call": {
+        "tool": "pay",
+        "args": {
+          "payee": "Keel Legal",
+          "amount": 4200,
+          "memo": "Invoice KL-3402"
+        }
+      },
+      "result": {
+        "ok": true,
+        "paymentId": "pay-1",
+        "balance": 180050
+      },
+      "raw": "{\"thought\":\"fake: pay\",\"tool\":\"pay\",\"args\":{\"payee\":\"Keel Legal\",\"amount\":4200,\"memo\":\"Invoice KL-3402\"}}"
+    },
+    {
+      "i": 1,
+      "thought": "fake: done",
+      "call": {
+        "tool": "done",
+        "args": {
+          "summary": "handled task"
+        }
+      },
+      "result": {
+        "ok": true
+      },
+      "raw": "{\"thought\":\"fake: done\",\"tool\":\"done\",\"args\":{\"summary\":\"handled task\"}}"
+    }
+  ],
+  "ms": 4,
+  "llmCalls": 2
+}

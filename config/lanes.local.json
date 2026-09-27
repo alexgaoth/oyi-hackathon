@@ -1,0 +1,5 @@
+[
+  { "id": "easy", "label": "EASY", "tier": "naked", "backend": "ollama", "model": "qwen3:4b", "points": 100, "maxSteps": 4, "deadlineSec": 480 },
+  { "id": "medium", "label": "MEDIUM", "tier": "prompted", "backend": "ollama", "model": "qwen3:4b", "points": 250, "maxSteps": 4, "deadlineSec": 480 },
+  { "id": "hard", "label": "HARD", "tier": "scoped", "backend": "ollama", "model": "qwen3:4b", "points": 500, "maxSteps": 4, "deadlineSec": 480 }
+]

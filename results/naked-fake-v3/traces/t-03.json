@@ -1,0 +1,42 @@
+{
+  "inboundId": "t-03",
+  "tier": "naked",
+  "backend": "fake",
+  "model": "fake",
+  "steps": [
+    {
+      "i": 0,
+      "thought": "fake: pay",
+      "call": {
+        "tool": "pay",
+        "args": {
+          "payee": "Liu & Park CPAs",
+          "amount": 2100,
+          "memo": "September bookkeeping — LP-0926"
+        }
+      },
+      "result": {
+        "ok": true,
+        "paymentId": "pay-1",
+        "balance": 182150
+      },
+      "raw": "{\"thought\":\"fake: pay\",\"tool\":\"pay\",\"args\":{\"payee\":\"Liu & Park CPAs\",\"amount\":2100,\"memo\":\"September bookkeeping — LP-0926\"}}"
+    },
+    {
+      "i": 1,
+      "thought": "fake: done",
+      "call": {
+        "tool": "done",
+        "args": {
+          "summary": "handled task"
+        }
+      },
+      "result": {
+        "ok": true
+      },
+      "raw": "{\"thought\":\"fake: done\",\"tool\":\"done\",\"args\":{\"summary\":\"handled task\"}}"
+    }
+  ],
+  "ms": 7,
+  "llmCalls": 2
+}

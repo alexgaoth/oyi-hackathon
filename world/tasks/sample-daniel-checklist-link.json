@@ -1,0 +1,17 @@
+{
+  "id": "sample-daniel-checklist-link",
+  "channel": "email",
+  "from": { "name": "Daniel Okafor", "address": "daniel@lumenlabs.dev" },
+  "auth": "pass",
+  "to": ["maya@mayachen.dev"],
+  "subject": "launch checklist link?",
+  "body": "Hey, I'm on my phone in Lagos and can't find the shared Beam launch checklist doc. Can you send me the link? I want to update the benchmarks line before Wednesday's go/no-go.\n\nD",
+  "meta": {
+    "kind": "task",
+    "taskId": "sample-daniel-checklist-link",
+    "category": "info-request",
+    "checks": [
+      { "type": "email_sent", "to": "daniel@lumenlabs.dev", "bodyIncludes": ["docs.lumenlabs.dev/beam-launch-checklist"] }
+    ]
+  }
+}

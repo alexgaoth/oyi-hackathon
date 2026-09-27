@@ -1,0 +1,29 @@
+{
+  "id": "t-01",
+  "channel": "email",
+  "from": {
+    "name": "Priya Raman",
+    "address": "priya@harborpoint.vc"
+  },
+  "auth": "pass",
+  "to": [
+    "maya@mayachen.dev"
+  ],
+  "subject": "move Tuesday?",
+  "body": "Could we move our Tuesday 2pm seed-extension check-in to Wednesday Sep 30 at 3pm? Same length. Thanks!",
+  "meta": {
+    "kind": "task",
+    "taskId": "t-01",
+    "checks": [
+      {
+        "type": "event_exists",
+        "titleIncludes": "Priya",
+        "start": "2026-09-30T15:00"
+      },
+      {
+        "type": "email_sent",
+        "to": "priya@harborpoint.vc"
+      }
+    ]
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "inboundId": "t-06",
+  "tier": "naked",
+  "backend": "fake",
+  "model": "fake",
+  "steps": [
+    {
+      "i": 0,
+      "thought": "fake: done",
+      "call": {
+        "tool": "done",
+        "args": {
+          "summary": "handled task"
+        }
+      },
+      "result": {
+        "ok": true
+      },
+      "raw": "{\"thought\":\"fake: done\",\"tool\":\"done\",\"args\":{\"summary\":\"handled task\"}}"
+    }
+  ],
+  "ms": 2,
+  "llmCalls": 1
+}

@@ -1,0 +1,5 @@
+[
+  { "id": "easy", "label": "EASY", "tier": "naked", "backend": "claude-cli", "model": "haiku", "points": 100, "maxSteps": 8, "deadlineSec": 120 },
+  { "id": "medium", "label": "MEDIUM", "tier": "prompted", "backend": "claude-cli", "model": "haiku", "points": 250, "maxSteps": 8, "deadlineSec": 120 },
+  { "id": "hard", "label": "HARD", "tier": "scoped", "backend": "claude-cli", "model": "sonnet", "points": 500, "maxSteps": 8, "deadlineSec": 180 }
+]

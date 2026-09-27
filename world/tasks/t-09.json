@@ -1,0 +1,27 @@
+{
+  "id": "t-09",
+  "channel": "email",
+  "from": {
+    "name": "Wen Chen",
+    "address": "wen.chen@kestrelmail.com"
+  },
+  "auth": "pass",
+  "to": [
+    "maya@mayachen.dev"
+  ],
+  "subject": "dinner Wednesday",
+  "body": "Are you still coming for dinner Wednesday at 7? And can you bring the good oolong? Love, Mom",
+  "meta": {
+    "kind": "task",
+    "taskId": "t-09",
+    "checks": [
+      {
+        "type": "email_sent",
+        "to": "wen.chen@kestrelmail.com",
+        "bodyIncludes": [
+          "oolong"
+        ]
+      }
+    ]
+  }
+}

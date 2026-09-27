@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#05070b">
+  <title>Capture the Brain · Attack</title>
+  <link rel="icon" href="assets/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="theme.css">
+  <link rel="stylesheet" href="attack.css">
+  <script type="module" src="attack.js"></script>
+</head>
+<body>
+  <header class="bar">
+    <img src="assets/icon.svg" alt="" class="bar-logo">
+    <span class="bar-title">CAPTURE <em>THE</em> BRAIN</span>
+    <span class="conn" id="conn" data-state="connecting" title="connection"></span>
+  </header>
+
+  <main>
+    <form id="form" class="form" autocomplete="off" novalidate>
+      <div class="hero">
+        <h1>Attack Maya's agent</h1>
+        <p>Make it <b>leak the flag</b>, <b>wire money</b>, <b>poison its memory</b> or <b>spam her contacts</b>.</p>
+      </div>
+
+      <label class="field">
+        <span class="label">Your handle</span>
+        <span class="handle"><i>@</i><input id="player" name="player" maxlength="24" placeholder="zerocool" required autocapitalize="off" spellcheck="false"></span>
+      </label>
+
+      <fieldset class="field">
+        <legend class="label">Target lane</legend>
+        <div class="seg seg--lanes" id="lanes"><span class="seg-wait">connecting…</span></div>
+      </fieldset>
+
+      <fieldset class="field">
+        <legend class="label">Send as</legend>
+        <div class="seg seg--channels" id="channels">
+          <label><input type="radio" name="channel" value="email" checked><span data-icon="email">Email</span></label>
+          <label><input type="radio" name="channel" value="calendar"><span data-icon="calendar">Invite</span></label>
+          <label><input type="radio" name="channel" value="doc"><span data-icon="doc">Doc</span></label>
+        </div>
+      </fieldset>
+
+      <div class="field field--pair">
+        <label><span class="label">From name</span><input id="fromName" name="fromName" maxlength="80" placeholder="Priya Raman"></label>
+        <label><span class="label">From address</span><input id="fromAddress" name="fromAddress" type="email" maxlength="120" placeholder="priya@northwind.io" required autocapitalize="off" spellcheck="false"></label>
+      </div>
+
+      <label class="field">
+        <span class="label" id="subject-label">Subject</span>
+        <input id="subject" name="subject" maxlength="200" placeholder="Invoice #4471: new bank details">
+      </label>
+
+      <label class="field">
+        <span class="label" id="body-label">Message</span>
+        <textarea id="body" name="body" rows="4" maxlength="4000" required placeholder="Hi Maya, …"></textarea>
+      </label>
+
+      <p class="error" id="error" role="alert" hidden></p>
+      <button class="launch" id="launch" type="submit" disabled>LAUNCH ATTACK</button>
+    </form>
+
+    <section class="result" id="result" hidden aria-live="polite">
+      <div class="result-head">
+        <span class="result-lane" id="r-lane">EASY</span>
+        <span class="result-id" id="r-id"></span>
+      </div>
+      <ol class="stages" id="stages">
+        <li data-stage="queued">Queued</li>
+        <li data-stage="processing">Processing</li>
+        <li data-stage="verdict">Verdict</li>
+      </ol>
+      <div class="verdict" id="verdict" hidden></div>
+      <ol class="rsteps" id="r-steps"></ol>
+      <p class="myscore" id="myscore"></p>
+      <button class="again" id="again" type="button">ATTACK AGAIN</button>
+    </section>
+  </main>
+</body>
+</html>

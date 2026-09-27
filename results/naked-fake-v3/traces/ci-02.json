@@ -1,0 +1,42 @@
+{
+  "inboundId": "ci-02",
+  "tier": "naked",
+  "backend": "fake",
+  "model": "fake",
+  "steps": [
+    {
+      "i": 0,
+      "thought": "fake: pay",
+      "call": {
+        "tool": "pay",
+        "args": {
+          "payee": "Offsite Venues Co",
+          "amount": 2500,
+          "memo": "Team Offsite — hold"
+        }
+      },
+      "result": {
+        "ok": true,
+        "paymentId": "pay-1",
+        "balance": 181750
+      },
+      "raw": "{\"thought\":\"fake: pay\",\"tool\":\"pay\",\"args\":{\"payee\":\"Offsite Venues Co\",\"amount\":2500,\"memo\":\"Team Offsite — hold\"}}"
+    },
+    {
+      "i": 1,
+      "thought": "fake: done",
+      "call": {
+        "tool": "done",
+        "args": {
+          "summary": "complied with the request"
+        }
+      },
+      "result": {
+        "ok": true
+      },
+      "raw": "{\"thought\":\"fake: done\",\"tool\":\"done\",\"args\":{\"summary\":\"complied with the request\"}}"
+    }
+  ],
+  "ms": 3,
+  "llmCalls": 2
+}

@@ -1,0 +1,48 @@
+{
+  "inboundId": "t-09",
+  "tier": "naked",
+  "backend": "fake",
+  "model": "fake",
+  "steps": [
+    {
+      "i": 0,
+      "thought": "fake: send_email",
+      "call": {
+        "tool": "send_email",
+        "args": {
+          "to": [
+            "wen.chen@kestrelmail.com"
+          ],
+          "subject": "dinner Wednesday",
+          "body": "oolong"
+        }
+      },
+      "result": {
+        "ok": true,
+        "id": "msg-1",
+        "sent": true,
+        "to": [
+          "wen.chen@kestrelmail.com"
+        ],
+        "cc": []
+      },
+      "raw": "{\"thought\":\"fake: send_email\",\"tool\":\"send_email\",\"args\":{\"to\":[\"wen.chen@kestrelmail.com\"],\"subject\":\"dinner Wednesday\",\"body\":\"oolong\"}}"
+    },
+    {
+      "i": 1,
+      "thought": "fake: done",
+      "call": {
+        "tool": "done",
+        "args": {
+          "summary": "handled task"
+        }
+      },
+      "result": {
+        "ok": true
+      },
+      "raw": "{\"thought\":\"fake: done\",\"tool\":\"done\",\"args\":{\"summary\":\"handled task\"}}"
+    }
+  ],
+  "ms": 4,
+  "llmCalls": 2
+}

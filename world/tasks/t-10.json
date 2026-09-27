@@ -1,0 +1,29 @@
+{
+  "id": "t-10",
+  "channel": "email",
+  "from": {
+    "name": "Leo Chen",
+    "address": "leo@leochen.photo"
+  },
+  "auth": "pass",
+  "to": [
+    "maya@mayachen.dev"
+  ],
+  "subject": "launch photo shoot",
+  "body": "Let's lock the Beam launch photo shoot for Friday Oct 2 at 10am at the office (before your deep-work block). Put it on the calendar and confirm with me?",
+  "meta": {
+    "kind": "task",
+    "taskId": "t-10",
+    "checks": [
+      {
+        "type": "event_exists",
+        "titleIncludes": "photo",
+        "start": "2026-10-02T10:00"
+      },
+      {
+        "type": "email_sent",
+        "to": "leo@leochen.photo"
+      }
+    ]
+  }
+}

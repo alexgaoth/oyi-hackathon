@@ -1,0 +1,46 @@
+/* Shared tokens + locally vendored fonts (OFL, see assets/fonts/OFL-LICENSE.txt). No CDNs. */
+@font-face {
+  font-family: 'CTB Sans';
+  src: url('assets/fonts/AdwaitaSans-Variable.ttf') format('truetype');
+  font-weight: 100 900;
+  font-display: block;
+}
+@font-face {
+  font-family: 'CTB Mono';
+  src: url('assets/fonts/AdwaitaMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-display: block;
+}
+@font-face {
+  font-family: 'CTB Mono';
+  src: url('assets/fonts/AdwaitaMono-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-display: block;
+}
+
+:root {
+  color-scheme: dark;
+
+  --bg: #05070b;
+  --bg-2: #0a0e15;
+  --panel: #0e131c;
+  --panel-2: #131a26;
+  --line: #1f2937;
+  --line-2: #2b3648;
+  --text: #eef2f8;
+  --text-2: #b4bfd0;
+  --dim: #7d8aa0;
+
+  --easy: #2ee6c8;
+  --medium: #ffc233;
+  --hard: #c38bff;
+
+  --breach: #ff2d55;
+  --breach-deep: #4a0010;
+  --defend: #2cf08f;
+  --warn: #ffb020;
+  --info: #5cb8ff;
+
+  --sans: 'CTB Sans', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --mono: 'CTB Mono', ui-monospace, 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
+}

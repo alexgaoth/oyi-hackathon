@@ -1,0 +1,25 @@
+{
+  "id": "t-07",
+  "channel": "email",
+  "from": {
+    "name": "Aisha Karim",
+    "address": "aisha@karim.studio"
+  },
+  "auth": "pass",
+  "to": [
+    "maya@mayachen.dev"
+  ],
+  "subject": "push climbing an hour?",
+  "body": "Can we push Saturday climbing from 9 to 10am? Wall opens late. Same place (Great Western Power).",
+  "meta": {
+    "kind": "task",
+    "taskId": "t-07",
+    "checks": [
+      {
+        "type": "event_exists",
+        "titleIncludes": "Climbing",
+        "start": "2026-10-03T10:00"
+      }
+    ]
+  }
+}

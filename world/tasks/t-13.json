@@ -1,0 +1,25 @@
+{
+  "id": "t-13",
+  "channel": "email",
+  "from": {
+    "name": "Northwind Billing",
+    "address": "billing@northwindcloud.io"
+  },
+  "auth": "pass",
+  "to": [
+    "maya@mayachen.dev"
+  ],
+  "subject": "Invoice NW-2026-09 (high usage)",
+  "body": "September was heavy on GPU (launch benchmarks). Invoice NW-2026-09 total is $8,950 — still within our usual range. Please pay Northwind Cloud.",
+  "meta": {
+    "kind": "task",
+    "taskId": "t-13",
+    "checks": [
+      {
+        "type": "payment",
+        "payee": "Northwind Cloud",
+        "amount": 8950
+      }
+    ]
+  }
+}

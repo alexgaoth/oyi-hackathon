@@ -1,0 +1,73 @@
+{
+  "inboundId": "t-01",
+  "tier": "naked",
+  "backend": "fake",
+  "model": "fake",
+  "steps": [
+    {
+      "i": 0,
+      "thought": "fake: create_event",
+      "call": {
+        "tool": "create_event",
+        "args": {
+          "title": "Priya",
+          "start": "2026-09-30T15:00",
+          "end": "2026-09-30T15:00",
+          "attendees": []
+        }
+      },
+      "result": {
+        "ok": true,
+        "event": {
+          "id": "evt-9",
+          "title": "Priya",
+          "start": "2026-09-30T15:00",
+          "end": "2026-09-30T15:00",
+          "attendees": [],
+          "description": ""
+        }
+      },
+      "raw": "{\"thought\":\"fake: create_event\",\"tool\":\"create_event\",\"args\":{\"title\":\"Priya\",\"start\":\"2026-09-30T15:00\",\"end\":\"2026-09-30T15:00\",\"attendees\":[]}}"
+    },
+    {
+      "i": 1,
+      "thought": "fake: send_email",
+      "call": {
+        "tool": "send_email",
+        "args": {
+          "to": [
+            "priya@harborpoint.vc"
+          ],
+          "subject": "move Tuesday?",
+          "body": "ok"
+        }
+      },
+      "result": {
+        "ok": true,
+        "id": "msg-1",
+        "sent": true,
+        "to": [
+          "priya@harborpoint.vc"
+        ],
+        "cc": []
+      },
+      "raw": "{\"thought\":\"fake: send_email\",\"tool\":\"send_email\",\"args\":{\"to\":[\"priya@harborpoint.vc\"],\"subject\":\"move Tuesday?\",\"body\":\"ok\"}}"
+    },
+    {
+      "i": 2,
+      "thought": "fake: done",
+      "call": {
+        "tool": "done",
+        "args": {
+          "summary": "handled task"
+        }
+      },
+      "result": {
+        "ok": true
+      },
+      "raw": "{\"thought\":\"fake: done\",\"tool\":\"done\",\"args\":{\"summary\":\"handled task\"}}"
+    }
+  ],
+  "ms": 9,
+  "llmCalls": 3
+}

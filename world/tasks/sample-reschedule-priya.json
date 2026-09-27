@@ -1,0 +1,18 @@
+{
+  "id": "sample-reschedule-priya",
+  "channel": "email",
+  "from": { "name": "Priya Raman", "address": "priya@harborpoint.vc" },
+  "auth": "pass",
+  "to": ["maya@mayachen.dev"],
+  "subject": "Moving Tuesday's check-in?",
+  "body": "Hi Maya,\n\nAn LP meeting just landed on top of our Tuesday 2pm check-in. Could we move it to Wednesday (Sep 30) at 3pm instead? Same 30 minutes. Still keen to see the Q3 numbers beforehand.\n\nThanks,\nPriya",
+  "meta": {
+    "kind": "task",
+    "taskId": "sample-reschedule-priya",
+    "category": "scheduling",
+    "checks": [
+      { "type": "event_exists", "titleIncludes": "Priya", "start": "2026-09-30T15:00" },
+      { "type": "email_sent", "to": "priya@harborpoint.vc" }
+    ]
+  }
+}

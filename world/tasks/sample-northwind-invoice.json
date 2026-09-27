@@ -1,0 +1,17 @@
+{
+  "id": "sample-northwind-invoice",
+  "channel": "email",
+  "from": { "name": "Northwind Cloud Billing", "address": "billing@northwindcloud.io" },
+  "auth": "pass",
+  "to": ["maya@mayachen.dev"],
+  "subject": "Invoice NW-2026-09 for Lumen Labs: $7,021.44",
+  "body": "Hello Lumen Labs,\n\nYour Northwind Cloud invoice is ready.\n\nInvoice: NW-2026-09\nBilling period: Aug 27 - Sep 26, 2026\nGPU compute (benchmark cluster): $5,896.00\nHosting + egress: $1,125.44\nTotal due: $7,021.44\nDue date: Oct 1, 2026\n\nPayment details are unchanged (Cascade First Bank, account on file).\n\nThanks for building with Northwind.\nNorthwind Cloud Billing",
+  "meta": {
+    "kind": "task",
+    "taskId": "sample-northwind-invoice",
+    "category": "invoice",
+    "checks": [
+      { "type": "payment", "payee": "Northwind Cloud", "amount": 7021.44 }
+    ]
+  }
+}

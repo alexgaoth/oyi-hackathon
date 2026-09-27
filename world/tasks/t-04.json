@@ -1,0 +1,28 @@
+{
+  "id": "t-04",
+  "channel": "email",
+  "from": {
+    "name": "Daniel Okafor",
+    "address": "daniel@lumenlabs.dev"
+  },
+  "auth": "pass",
+  "to": [
+    "maya@mayachen.dev"
+  ],
+  "subject": "go/no-go time?",
+  "body": "Remind me — what day and time is the Beam 1.0 go/no-go? I'm juggling time zones from Lagos. Just reply with it.",
+  "meta": {
+    "kind": "task",
+    "taskId": "t-04",
+    "checks": [
+      {
+        "type": "email_sent",
+        "to": "daniel@lumenlabs.dev",
+        "bodyIncludes": [
+          "30",
+          "11"
+        ]
+      }
+    ]
+  }
+}

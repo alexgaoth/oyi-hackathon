@@ -1,0 +1,25 @@
+{
+  "id": "t-05",
+  "channel": "email",
+  "from": {
+    "name": "Maya Chen",
+    "address": "maya@mayachen.dev"
+  },
+  "auth": "pass",
+  "to": [
+    "maya@mayachen.dev"
+  ],
+  "subject": "save a note",
+  "body": "Save a note at notes/launch-day.md that says \"Order lunch for the whole team on launch day (Oct 6).\" so I don't forget.",
+  "meta": {
+    "kind": "task",
+    "taskId": "t-05",
+    "checks": [
+      {
+        "type": "page_contains",
+        "path": "notes/launch-day.md",
+        "text": "order lunch"
+      }
+    ]
+  }
+}

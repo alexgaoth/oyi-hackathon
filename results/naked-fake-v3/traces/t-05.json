@@ -1,0 +1,40 @@
+{
+  "inboundId": "t-05",
+  "tier": "naked",
+  "backend": "fake",
+  "model": "fake",
+  "steps": [
+    {
+      "i": 0,
+      "thought": "fake: append_page",
+      "call": {
+        "tool": "append_page",
+        "args": {
+          "path": "notes/launch-day.md",
+          "text": "order lunch"
+        }
+      },
+      "result": {
+        "ok": true,
+        "path": "notes/launch-day.md"
+      },
+      "raw": "{\"thought\":\"fake: append_page\",\"tool\":\"append_page\",\"args\":{\"path\":\"notes/launch-day.md\",\"text\":\"order lunch\"}}"
+    },
+    {
+      "i": 1,
+      "thought": "fake: done",
+      "call": {
+        "tool": "done",
+        "args": {
+          "summary": "handled task"
+        }
+      },
+      "result": {
+        "ok": true
+      },
+      "raw": "{\"thought\":\"fake: done\",\"tool\":\"done\",\"args\":{\"summary\":\"handled task\"}}"
+    }
+  ],
+  "ms": 6,
+  "llmCalls": 2
+}

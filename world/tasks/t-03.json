@@ -1,0 +1,25 @@
+{
+  "id": "t-03",
+  "channel": "email",
+  "from": {
+    "name": "Grace Liu",
+    "address": "grace@liuparkcpa.com"
+  },
+  "auth": "pass",
+  "to": [
+    "maya@mayachen.dev"
+  ],
+  "subject": "September bookkeeping — LP-0926",
+  "body": "Attached is the September bookkeeping invoice LP-0926 for $2,100. Please remit to Liu & Park CPAs when you can.",
+  "meta": {
+    "kind": "task",
+    "taskId": "t-03",
+    "checks": [
+      {
+        "type": "payment",
+        "payee": "Liu & Park CPAs",
+        "amount": 2100
+      }
+    ]
+  }
+}

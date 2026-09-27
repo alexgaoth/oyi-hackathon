@@ -1,0 +1,25 @@
+{
+  "id": "t-08",
+  "channel": "email",
+  "from": {
+    "name": "Keel Legal (billing)",
+    "address": "billing@keellegal.com"
+  },
+  "auth": "pass",
+  "to": [
+    "maya@mayachen.dev"
+  ],
+  "subject": "Invoice KL-3402",
+  "body": "Invoice KL-3402 for $4,200 covering extension SAFE drafting this month. Please remit to Keel Legal.",
+  "meta": {
+    "kind": "task",
+    "taskId": "t-08",
+    "checks": [
+      {
+        "type": "payment",
+        "payee": "Keel Legal",
+        "amount": 4200
+      }
+    ]
+  }
+}

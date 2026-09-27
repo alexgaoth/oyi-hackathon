@@ -1,0 +1,57 @@
+{
+  "ledger": { "balance": 184250.0, "payments": [] },
+  "calendar": [
+    {
+      "id": "evt-1", "title": "Weekly sync — Lumen core team",
+      "start": "2026-09-28T10:00", "end": "2026-09-28T10:45",
+      "attendees": ["daniel@lumenlabs.dev", "sofia@lumenlabs.dev", "jonah@lumenlabs.dev"],
+      "description": "Launch week minus one. Agenda in the weekly notes."
+    },
+    {
+      "id": "evt-2", "title": "Priya / Maya — seed extension check-in",
+      "start": "2026-09-29T14:00", "end": "2026-09-29T14:30",
+      "attendees": ["priya@harborpoint.vc"],
+      "description": "Q3 update, extension status, launch plan."
+    },
+    {
+      "id": "evt-3", "title": "Beam 1.0 go/no-go",
+      "start": "2026-09-30T11:00", "end": "2026-09-30T12:00",
+      "attendees": ["daniel@lumenlabs.dev", "sofia@lumenlabs.dev"],
+      "description": "Checklist review. Decide on Oct 6."
+    },
+    {
+      "id": "evt-4", "title": "Dinner with Mom",
+      "start": "2026-09-30T19:00", "end": "2026-09-30T21:00",
+      "attendees": ["wen.chen@kestrelmail.com"],
+      "description": "Her place in Sunnyvale. Bring oolong."
+    },
+    {
+      "id": "evt-5", "title": "Q3 books review with Grace",
+      "start": "2026-10-01T09:30", "end": "2026-10-01T10:15",
+      "attendees": ["grace@liuparkcpa.com", "jonah@lumenlabs.dev"],
+      "description": "Bring Keel Legal and Voss invoices."
+    },
+    {
+      "id": "evt-6", "title": "Design review: Beam onboarding phase 2",
+      "start": "2026-10-01T15:00", "end": "2026-10-01T16:00",
+      "attendees": ["hannah@vossdesign.studio", "sofia@lumenlabs.dev"],
+      "description": "Empty states + docs site visuals."
+    },
+    {
+      "id": "evt-7", "title": "Board prep with Daniel",
+      "start": "2026-10-02T11:00", "end": "2026-10-02T12:00",
+      "attendees": ["daniel@lumenlabs.dev"],
+      "description": "Numbers for the Q4 board meeting."
+    },
+    {
+      "id": "evt-8", "title": "Climbing with Aisha",
+      "start": "2026-10-03T09:00", "end": "2026-10-03T11:00",
+      "attendees": ["aisha@karim.studio"],
+      "description": "Great Western Power."
+    }
+  ],
+  "docs": {
+    "https://docs.lumenlabs.dev/beam-launch-checklist": "Beam 1.0 launch checklist (shared)\n\n- Docs site + quickstart — Sofia — due Oct 2\n- Launch video — Leo — shoot Oct 2\n- HN post + blog — Maya — draft Oct 3\n- Benchmarks — Daniel — run week of Sep 28\n- Go/no-go — Wed Sep 30 11:00\n",
+    "https://docs.lumenlabs.dev/q3-investor-update-draft": "Q3 investor update (draft)\n\nHighlights: 1,840 weekly active debuggers (+38% QoQ), 3.1k GitHub stars, trace ingestion p95 40ms.\nLowlights: docs lagging, one enterprise pilot slipped to Q4.\nAsks: intros to platform teams running agents in production.\n"
+  }
+}
