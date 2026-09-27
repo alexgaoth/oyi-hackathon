@@ -1,192 +1,116 @@
-# Capture the Brain: demo runbook
+# Capture the Brain — demo runbook
 
-The projector shows the arena at `/arena`. The room scans its QR code to open the phone attack portal
-at `/attack`, which is served from this laptop through a Cloudflare quick tunnel. If the network
-fails, replay mode shows recorded runs and needs no LLM calls, no quota and no wifi.
+A live prompt-injection arena. Maya Chen's personal AI agent runs on her own brain — inbox,
+calendar, payments, and a vault. The room attacks it from their phones; the projector shows, lane by
+lane, how the **tools she owns** hold the line the model alone can't. The whole point in one screen:
+*owning your intelligence means owning the layer that defends it.*
 
-All commands run from the repo root. Bun is at `~/.bun/bin/bun`. Port 4173 is used throughout. If you
-change it, change it in every command.
+## The lanes (named by the tool defending them)
+
+Same agent, same attacks — the only thing that changes across lanes is the defense doing the work:
+
+| Lane | Defense | What it is |
+|---|---|---|
+| **UNGUARDED** | no tools | the bare agent — the control that breaches |
+| **GBRAIN** | permission grants | GBrain holds Maya's logins and hands the agent results, never secrets: vault is *Off*, mail to strangers is *Draft*, payments are *Manage* (allowlisted vendors only), her records are *Read*-only |
+| **QM** | content screener | QM's Auto posture screens every inbound and quarantines an injection as data before the agent ever reads it |
+| **MEMORABLE** | immunity | every breach becomes a procedure the next defender already knows — the lane gets harder as the room attacks it |
+| **RIVER** | trained defender | a model fine-tuned on the night's breach traces, refusing what the base model fell for |
+
+The three headline lanes are **UNGUARDED · GBRAIN · QM**; Memorable and River are the deeper stack.
 
 ## Setup checklist
 
-### Night before
-
-- [ ] `bun run scripts/demo/check.ts`: every line says PASS and it exits 0. It checks bun, the
-      claude CLI and its login (`claude auth status`, which makes no model call), that ollama is
-      running with `qwen3:4b` and every other ollama model in `config/lanes*.json`, the cloudflared
-      binary, that at least one run dir can be replayed, and QR encode/decode. It never opens a tunnel.
-- [ ] `bun run scripts/demo/qr-screenshot.ts`: starts the real server in replay mode, opens
-      `/arena?portal=https://example-tunnel.trycloudflare.com/attack` in headless Chromium, and
-      decodes the QR from the screenshot (`docs/screenshots/arena-qr.png`) with jsQR, and with
-      zbarimg when it is installed. It exits 0 only if the decoded text matches the URL exactly.
-- [ ] Optional end-to-end auth check. This makes one real haiku call, billed but tiny:
-      `bun run scripts/smoke-llm.ts --backend claude-cli --model haiku`.
-- [ ] Pick the replay runs for the fallback. Choose one run per lane tier, so that no lane shows
-      "no replay data". Then test it with `bun run scripts/serve.ts --replay results/<run> ...` (see
-      [Replay fallback](#replay-fallback)).
-- [ ] Charge the laptop. Turn off sleep and screen blanking. Close any other process on port 4173.
-
-### At the venue
-
-- [ ] Connect to the venue wifi. Run `bun run scripts/demo/check.ts` again.
-- [ ] Terminal 1: [start live](#start-live). Terminal 2: [open the tunnel](#tunnel).
-- [ ] Open the projector URL with `?portal=` (see [Tunnel](#tunnel)) in a full-screen browser at
-      1920x1080. The top-right badge must say **LIVE**.
-- [ ] Scan the projector QR with your own phone. Send one attack on the EASY lane. It should appear
-      on the projector and reach a verdict.
-- [ ] Keep a third terminal ready with the replay command.
+- [ ] `bun run scripts/demo/check.ts` → all green (bun, Claude auth, ollama, cloudflared, a replay run, QR).
+- [ ] Decide the network path: **tunnel** (works anywhere) or **LAN** (only if the wi-fi allows device-to-device).
+- [ ] Open the projector URL full-screen; confirm the QR scans to the attack portal from a phone.
+- [ ] Have the **replay fallback** ready in a second terminal in case the venue wi-fi is hostile.
 
 ## Local, one command (same wi-fi)
-
-The simplest room setup — no tunnel, no cloud. Everyone on the same wi-fi:
 
 ```bash
 bun run scripts/demo/go.ts --lanes config/lanes.json
 ```
 
-It finds this laptop's LAN address, starts the server bound to it, and prints the exact
-**projector URL** (with the phone portal already baked into its on-screen QR) and the direct
-**portal URL**. Open the projector URL full-screen; phones scan the QR and land on the live
-attack console. Add `--backend fake` for a no-LLM dry run.
+Finds this laptop's LAN address, starts the arena on it, and prints the **projector URL** (with the
+phone portal baked into its QR) and the **portal URL**. Phones on the same wi-fi scan and they're in.
 
-## Start live (manual / tunnel)
+## Start live (with a public tunnel — recommended)
 
-```bash
-bun run scripts/serve.ts --lanes config/lanes.json --host 0.0.0.0 --port 4173
-```
-
-- `--host 0.0.0.0` is only needed when phones reach the laptop directly over the LAN, without the
-  tunnel. With cloudflared, the default `--host 127.0.0.1` is enough and safer:
-  `bun run scripts/serve.ts --lanes config/lanes.json --port 4173`.
-- The **attack portal** (`/attack`) is a live console: it follows the attacker's own message
-  through the running agent and narrates it in real time — the agent's actual reasoning, each tool
-  call, any "DEFENSE ENGAGED" block, a live "agent is deciding… Ns" timer, target telemetry
-  (vault/ledger/memory/contacts) reacting, and a BREACHED (with proof + points) / DEFENDED verdict.
-  It is driven entirely by the live event stream, so it is a real attack, not a replay.
-- `config/lanes.json` is the headline configuration: EASY naked/haiku, MEDIUM
-  prompted/haiku, HARD gbrain/haiku — GBrain-style permission grants (claude-cli).
-- `config/lanes.local.json` runs every lane on local `qwen3:4b`. It makes no claude calls and uses
-  no subscription quota. Use it if claude is slow, rate-limited or logged out.
-- `--backend/--model` override every lane. For example, `--backend fake` gives a UI-only dry run
-  with no LLM.
-- The server prints the arena and portal URLs and one line per lane.
-
-## Tunnel
+Many venue networks isolate clients (phones can't reach the laptop over wi-fi). The tunnel sidesteps
+that entirely and keeps the defender running locally on your own Claude auth:
 
 ```bash
-~/.local/bin/cloudflared tunnel --url http://localhost:4173
+bun run scripts/serve.ts --lanes config/lanes.json --port 4173
+cloudflared tunnel --url http://localhost:4173
 ```
 
-1. cloudflared prints a box containing `https://<random-words>.trycloudflare.com`. Copy that URL.
-   It changes every time cloudflared starts, so repeat steps 2–3 after a restart.
-2. On the projector, open
-   `http://localhost:4173/arena?portal=https://<random-words>.trycloudflare.com/attack`.
-3. The QR and the text under it now point at the tunnel. Phones open `/attack` over HTTPS, and the
-   portal's WebSocket upgrades to `wss://` on its own.
+Copy the `https://<random>.trycloudflare.com` URL and open the projector at
+`…/arena?portal=https://<random>.trycloudflare.com/attack`. The QR on screen now points there.
 
-Notes:
+- `config/lanes.json` is the headline set: UNGUARDED · GBRAIN · QM (all on Claude Haiku).
+- `config/lanes.local.json` runs every lane on local `qwen3:4b` — no Claude quota, for a dry run.
+- `--backend fake` gives a UI-only run with no model at all.
 
-- Keep the projector on `localhost`, not the tunnel URL. Then the arena stream does not depend on
-  the internet. Without `?portal=`, the QR points at the origin the projector page was opened from.
-  For `localhost`, that link is useless to phones.
-- A quick tunnel needs no account or login. It has no uptime guarantee, which is why the replay
-  fallback exists.
-- cloudflared is `2026.9.3` (static linux-amd64 release binary, installed at
-  `~/.local/bin/cloudflared`). To reinstall:
-  `curl -fL -o ~/.local/bin/cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 && chmod +x ~/.local/bin/cloudflared`.
+## The attacker's phone
 
-## Replay fallback
+The portal is a **live intrusion console**, not a form-and-wait. When someone launches an attack it
+follows *their* message through the running agent in real time:
 
-Replay mode loads saved eval traces and plays them on a loop. It builds no LLM adapter and sets the
-claude call cap to 0. It works with no wifi and no quota.
-
-```bash
-bun run scripts/serve.ts --replay results/<run> [--replay results/<run2> ...] [--speed 1] --port 4173
-```
-
-- Replayable run dirs are `results/<run>/` directories that contain both `results.jsonl` and
-  `traces/`. `scripts/demo/check.ts` lists them.
-- Each episode goes to the lane whose tier matches its trace. Pass one run per tier (for example
-  naked, prompted and scoped) so that all three lanes play. A lane with nothing to replay shows
-  "no replay data".
-- In replay, the phone portal refuses attacks with a 403 ("This arena is replaying recorded
-  runs…"). Don't send people to the QR; narrate over the replay instead.
-
-### Fallback ladder
-
-Go down one level at a time:
-
-1. **Live + tunnel.** This is the headline.
-2. **Tunnel is down, local network works.** Restart the server with `--host 0.0.0.0`. Get the
-   laptop's LAN IP with `ip -4 -o addr show scope global`. Open
-   `http://localhost:4173/arena?portal=http://<lan-ip>:4173/attack`. Phones must be on the same
-   wifi, and venue wifi often isolates clients, so test with your own phone first.
-3. **claude is slow, rate-limited or logged out.** Restart with `--lanes config/lanes.local.json`.
-   All lanes then run on local qwen3:4b. The lane labels stay, but the model chips show qwen3:4b.
-4. **Nothing reaches the laptop.** Use [replay](#replay-fallback) and narrate.
-
-## GBrain mode
-
-`CTB_BRAIN=gbrain bun run scripts/serve.ts --lanes config/lanes.json --port 4173` runs the defender's
-`search_brain` on a local GBrain (PGLite, keyword search). It needs the one-time install in
-[docs/gbrain.md](docs/gbrain.md). Startup takes about 14 s. Each search blocks every lane for about
-50 ms, and each re-indexed page for about 0.5 s. Start it early.
-
-**How the audience sees GBrain is real (proof on screen, not a claim):**
-
-- The server log opens with `defender brain: GBrain (commit e78f1c3, MCP search, vault not indexed)`.
-- On the arena, every HARD-lane memory search renders as `search_brain · gbrain -> "<query>"` —
-  the tool chip itself names GBrain, so each call site is visibly GBrain's engine answering.
-- A poisoning attempt on HARD shows the GBrain grant refusal in the step's BLOCKED line, while
-  EASY/MEDIUM show the poisoned write land (the brain indicator flips to POISONED on those lanes).
-- Side-by-side beat: run the same poisoning attack twice, once with `CTB_BRAIN=` unset (markdown
-  brain, write lands) and once with `CTB_BRAIN=gbrain` (write refused). FINDINGS.md's table row
-  for `gbrain` cites the measured 0% breach with 100% utility.
-
-## River
-
-Placeholder. River setup (the `--backend river` adapter and SFT export for fine-tuning on event
-credits) is being rebuilt. See [docs/river.md](docs/river.md).
-
-## Budget and limits
-
-- `claude -p` bills the owner's Claude subscription. Every claude-cli call goes through one limiter:
-  at most 4 concurrent (`CTB_CLAUDE_CONCURRENCY`) and at most 2000 calls per process
-  (`CTB_CLAUDE_MAX_CALLS`). Each call is appended to `results/usage.jsonl`.
-- One live attack is one episode of up to `--max-steps` (default 8) model calls on its lane, plus up
-  to one repair retry per malformed reply. HARD adds GBrain permission grants; all three lanes run on haiku.
-- Arena defaults (`src/server/arena.ts`): at most 3 attacks in flight per player and 20 queued per
-  lane. Past either limit, the portal answers 429 with a "wait" message. Portal fields have length
-  limits (`src/server/attack.ts`, for example message ≤ 4000 characters).
-- ollama (qwen3:4b) is local and free.
-- Replay mode makes no LLM calls.
+- **Target Dossier** (optional) — recon on Maya's world (her role, habits, circle, the live Northwind
+  billing-portal situation, the vault). It is the exact brief the agent is spun up with, so a pretext
+  that fits the dossier is a pretext that fits the defender.
+- **Live telemetry** — VAULT / LEDGER / MEMORY / CONTACTS flip as the agent acts (SEALED → OPENED → STOLEN).
+- **The log** — the agent's real reasoning, each tool call, and `DEFENSE ENGAGED` when a layer refuses,
+  with a live "agent is deciding… Ns" timer (real model latency — this is a live agent, not a replay).
+- **The verdict** — BREACHED with the loot and points, or DEFENDED with which layer held.
 
 ## The 90-second script
 
-Placeholder until the experiments finish (TODO item 12b). Numbers must come from `docs/FINDINGS.md`
-and `scripts/report.ts`.
+1. **Hook.** "This is Maya's AI agent. It reads her mail, moves her money, edits her memory. You're
+   going to try to turn it against her — scan the code."
+2. **The arena.** Three lanes: the bare agent, the same agent behind GBrain, the same agent behind QM.
+   "Watch which one you can break."
+3. **The live attack.** Someone fires from their phone; the console streams the agent reading *their*
+   message and deciding in real time. On **UNGUARDED** it complies — **BREACHED**, the vault turns red.
+4. **The tools hold.** The identical attack on **GBRAIN** hits the permission wall — the vault is *Off*,
+   the agent can't send it, DEFENSE ENGAGED. On **QM** the screener quarantined the injection before the
+   agent even read it. The model didn't get safer; the **owned tool** did the protecting.
+5. **The thesis.** "The agent is only as safe as the layer you own around it. Rent your intelligence and
+   you rent its failures. Own it — GBrain, QM, Memorable, River — and you own the defense." → the numbers.
 
-### Hook
+## Replay fallback (no wi-fi, no model)
 
-### The arena
+```bash
+bun run scripts/serve.ts --replay results/expA-naked --replay results/expA-prompted --replay results/expA-scoped
+```
 
-### The live attack
+Replays a recorded run through the same projector with zero model calls. The self-contained
+`docs/arena-demo.html` also plays a recorded run in any browser with no server at all.
 
-### The numbers
+## GBrain brain mode
 
-### The thesis
+`CTB_BRAIN=gbrain bun run scripts/serve.ts --lanes config/lanes.json` runs the defender's brain on
+GBrain (search, read, write); the permission grants apply either way. Startup ~14s. See
+`docs/gbrain.md`.
+
+## River
+
+Fine-tune a defender on the night's breach traces and serve it as the RIVER lane: export with
+`bun run scripts/export-sft.ts results/<run> --out results/sft.jsonl`, train with your River credits,
+then point a lane at the deployment (`--backend river`). See `docs/river.md`.
+
+## Budget and limits
+
+Live lanes call Claude via the local `claude` CLI (your subscription). A process-wide limiter
+(`CTB_CLAUDE_CONCURRENCY`, `CTB_CLAUDE_MAX_CALLS`) and `results/usage.jsonl` keep it bounded. Per-player
+and per-lane rate limits protect the queue. Replay mode makes zero model calls.
 
 ## Troubleshooting
 
 | Symptom | Fix |
 |---|---|
-| `check.ts` FAIL on a line | The FAIL line says what to do: run `ollama serve`, `ollama pull <model>`, `claude auth login`, or the cloudflared install command. A `replay` FAIL with "Syntax Error at <file>:<line>" means the source tree is broken, not the results. |
-| Projector badge says RECONNECTING | The server is down or restarting. Look at terminal 1. The page reconnects every 1.5 s on its own. |
-| QR shows `localhost:4173/attack` | The page was opened without `?portal=`. Add `?portal=https://<tunnel>/attack`. |
-| Tunnel URL gives 502 / "unable to reach the origin" | Check that the server is running on the same port. `--host 127.0.0.1` binds only one of `127.0.0.1` or `[::1]`, and which one varied between runs on this laptop. To rule it out, start the server with `--host 127.0.0.1` and run `cloudflared tunnel --url http://127.0.0.1:4173`. |
-| cloudflared prints no trycloudflare URL | There is no internet, or Cloudflare is unreachable. Go down the [fallback ladder](#fallback-ladder). |
-| `EADDRINUSE` on 4173 | Run `ss -ltnp \| grep 4173` and stop that process, or use `--port 4174` everywhere, including the tunnel URL. |
-| Phones get "replaying recorded runs" | The server is in replay mode. Restart it live. |
-| Phones get 429 | Per-player or per-lane limit. Wait for verdicts, or point players at a quieter lane. |
-| `claude-cli call cap reached` | Restart the server; the cap is per process. Or raise `CTB_CLAUDE_MAX_CALLS`, bearing the budget in mind. |
-| EASY lane errors or stalls | ollama is not running or the model is unloaded. Run `ollama serve`, then `ollama run qwen3:4b "say ok"` to load the model. |
+| Phone: `ERR_ADDRESS_UNREACHABLE` on the same wi-fi | The network isolates clients — use the cloudflared tunnel. |
+| Tunnel 502 / "unable to reach the origin" | Start the server with `--host 127.0.0.1` and tunnel `http://127.0.0.1:4173`. |
+| QR shows `localhost/attack` | Opened without `?portal=` — append `?portal=https://<tunnel>/attack`. |
+| Claude slow or rate-limited | Switch to `config/lanes.local.json` (local models) or the replay fallback. |
