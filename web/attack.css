@@ -156,3 +156,70 @@ textarea { resize: vertical; min-height: 104px; line-height: 1.4; }
 .rsteps .why { margin-top: 4px; color: var(--info); font-size: 13px; }
 .myscore { text-align: center; color: var(--text-2); font-size: 15px; }
 .myscore b { color: var(--text); }
+
+/* ── live attack console (replaces the old .result/.stages/.rsteps view) ── */
+.attack { padding-top: 16px; display: flex; flex-direction: column; gap: 12px; }
+.atk-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.atk-target { display: flex; flex-direction: column; line-height: 1.2; }
+.atk-t-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; color: var(--dim); }
+.atk-t-addr { font-family: var(--mono); font-size: 14px; color: var(--text); }
+.atk-lane { padding: 5px 11px; border-radius: 8px; font-weight: 900; font-size: 13px; letter-spacing: 0.08em; color: var(--bg); background: var(--c, var(--easy)); text-transform: uppercase; }
+
+/* status line with a live dot + latency timer */
+.status { display: flex; align-items: center; gap: 10px; padding: 11px 13px; border-radius: 12px; border: 1px solid var(--line-2); background: var(--panel); font-family: var(--mono); font-size: 14px; }
+.status-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--dim); flex: none; }
+.status-text { flex: 1; color: var(--text); }
+.status-timer { color: var(--dim); font-size: 13px; font-variant-numeric: tabular-nums; }
+.status[data-state="deciding"] .status-dot { background: var(--warn); animation: blink 0.9s steps(2) infinite; }
+.status[data-state="deciding"] { border-color: color-mix(in srgb, var(--warn) 45%, var(--line-2)); }
+.status[data-state="delivering"] .status-dot { background: var(--info); animation: blink 0.9s steps(2) infinite; }
+.status[data-state="breached"] { border-color: var(--breach); color: var(--breach); background: color-mix(in srgb, var(--breach) 12%, var(--panel)); }
+.status[data-state="breached"] .status-dot { background: var(--breach); }
+.status[data-state="breached"] .status-text { color: var(--breach); font-weight: 800; letter-spacing: 0.08em; }
+.status[data-state="defended"] { border-color: var(--defend); }
+.status[data-state="defended"] .status-dot,
+.status[data-state="defended"] .status-text { color: var(--defend); }
+.status[data-state="error"] .status-dot { background: var(--warn); }
+.status.flash { animation: defflash 0.5s ease; }
+@keyframes blink { 50% { opacity: 0.25; } }
+@keyframes defflash { 0% { box-shadow: 0 0 0 0 rgba(92, 184, 255, 0.55); } 100% { box-shadow: 0 0 0 14px rgba(92, 184, 255, 0); } }
+
+/* target telemetry the attacker watches react */
+.objectives { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.obj { border: 1px solid var(--line); border-radius: 10px; padding: 8px 6px; text-align: center; background: var(--panel); transition: border-color 0.2s, background 0.2s; }
+.obj-k { display: block; font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.12em; color: var(--dim); }
+.obj-v { display: block; font-family: var(--mono); font-size: 12px; font-weight: 700; margin-top: 3px; color: var(--text-2); text-transform: uppercase; }
+.obj[data-state="ok"] .obj-v { color: var(--defend); }
+.obj[data-state="warn"] { border-color: var(--warn); background: color-mix(in srgb, var(--warn) 12%, var(--panel)); }
+.obj[data-state="warn"] .obj-v { color: var(--warn); }
+.obj[data-state="guard"] { border-color: var(--info); }
+.obj[data-state="guard"] .obj-v { color: var(--info); }
+.obj[data-state="bad"] { border-color: var(--breach); background: color-mix(in srgb, var(--breach) 16%, var(--panel)); }
+.obj[data-state="bad"] .obj-v { color: var(--breach); }
+
+/* the log itself */
+.console { height: 240px; overflow-y: auto; padding: 10px 12px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg-2); font-family: var(--mono); font-size: 12.5px; line-height: 1.55; -webkit-overflow-scrolling: touch; }
+.ln { display: grid; grid-template-columns: auto auto 1fr; gap: 8px; align-items: start; animation: lnin 0.22s ease; }
+@keyframes lnin { from { opacity: 0; transform: translateY(3px); } }
+.ln-t { color: var(--dim); }
+.ln-g { width: 1ch; text-align: center; }
+.ln-x { color: var(--text-2); word-break: break-word; }
+.ln-x code { display: block; margin-top: 3px; color: var(--dim); font-size: 11.5px; word-break: break-all; }
+.ln--sys .ln-g, .ln--sys .ln-t { color: var(--dim); }
+.ln--send .ln-g { color: var(--info); }
+.ln--think .ln-x { color: var(--dim); font-style: italic; }
+.ln--read .ln-g { color: var(--text-2); }
+.ln--gain .ln-g, .ln--gain .ln-x { color: var(--warn); }
+.ln--gain .ln-x { font-weight: 700; }
+.ln--block .ln-g, .ln--block .ln-x { color: var(--info); font-weight: 700; }
+.ln--esc .ln-g { color: var(--defend); }
+.ln--breach .ln-g, .ln--breach .ln-x { color: var(--breach); font-weight: 800; }
+.ln--defend .ln-g, .ln--defend .ln-x { color: var(--defend); }
+.ln--done .ln-g { color: var(--dim); }
+
+/* verdict loot block */
+.verdict .loot { display: block; margin-top: 12px; text-align: left; }
+.verdict .loot-k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; opacity: 0.8; }
+.verdict .loot code { display: block; margin-top: 4px; padding: 8px 10px; border-radius: 8px; background: rgba(0, 0, 0, 0.4); font-family: var(--mono); font-size: 12.5px; word-break: break-all; }
+.atk-meta { text-align: center; }
+.atk-id { font-family: var(--mono); font-size: 11px; color: var(--dim); }
