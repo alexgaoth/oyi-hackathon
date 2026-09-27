@@ -24,12 +24,19 @@ body {
   inset: 0;
   z-index: -1;
   background:
-    radial-gradient(ellipse 60% 50% at 20% 0%, rgba(46, 230, 200, 0.07), transparent 70%),
-    radial-gradient(ellipse 60% 50% at 80% 0%, rgba(195, 139, 255, 0.07), transparent 70%),
-    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px) 0 0 / 3rem 3rem,
-    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px) 0 0 / 3rem 3rem,
+    radial-gradient(ellipse 60% 50% at 20% 0%, rgba(46, 230, 200, 0.20), transparent 70%),
+    radial-gradient(ellipse 60% 50% at 80% 0%, rgba(195, 139, 255, 0.18), transparent 70%),
+    radial-gradient(ellipse 70% 40% at 50% 100%, rgba(255, 45, 85, 0.10), transparent 70%),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px) 0 0 / 3rem 3rem,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px) 0 0 / 3rem 3rem,
     var(--bg);
+  animation: drift 26s ease-in-out infinite alternate;
 }
+@keyframes drift {
+  from { background-position: 0% 0%, 100% 0%, 50% 100%, 0 0, 0 0, 50% 50%; }
+  to   { background-position: 12% 6%, 86% 8%, 44% 92%, 0 0, 0 0, 52% 48%; }
+}
+@media (prefers-reduced-motion: reduce) { .backdrop { animation: none; } }
 .icon { width: 1.3em; height: 1.3em; flex: none; }
 h1, h2, p { margin: 0; }
 b, strong { font-weight: 800; }
@@ -97,10 +104,13 @@ b, strong { font-weight: 800; }
   gap: 0.85rem;
   min-height: 0;
   padding: 1rem 1.05rem 0;
-  border: 1px solid var(--line);
+  border: 1px solid var(--glass-border);
   border-top: 0.3rem solid var(--lane);
-  border-radius: 0.9rem;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--lane) 7%, var(--panel)) 0%, var(--panel) 9rem);
+  border-radius: 1.2rem;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--lane) 9%, rgba(255, 255, 255, 0.05)) 0%, var(--glass) 9rem);
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(1.6);
+  backdrop-filter: blur(var(--blur)) saturate(1.6);
+  box-shadow: var(--glass-shadow);
   overflow: hidden;
   transition: box-shadow 0.4s, border-color 0.4s;
 }
@@ -378,9 +388,12 @@ b, strong { font-weight: 800; }
 .side { display: flex; flex-direction: column; gap: 1.25rem; min-height: 0; }
 .side h2 { font-size: 1.35rem; font-weight: 900; letter-spacing: 0.18em; color: var(--text-2); }
 .join, .board {
-  border: 1px solid var(--line);
-  border-radius: 0.9rem;
-  background: var(--panel);
+  border: 1px solid var(--glass-border);
+  border-radius: 1.2rem;
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(1.6);
+  backdrop-filter: blur(var(--blur)) saturate(1.6);
+  box-shadow: var(--glass-shadow);
   padding: 1rem 1.1rem;
 }
 .join { display: flex; flex-direction: column; align-items: center; gap: 0.8rem; border-top: 0.3rem solid var(--breach); }
@@ -430,7 +443,7 @@ b, strong { font-weight: 800; }
   gap: 0.5rem;
 }
 /* header right edges line up with the breaches / pts columns below */
-.board-head { display: flex; gap: 0.5rem; padding: 0 0.5rem 0 2.8rem; font-size: 0.95rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: var(--dim); }
+.board-head { display: flex; gap: 0.5rem; padding: 0 0.5rem 0 2.8rem; font-size: 1rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #93a1b8; }
 .board-head span:first-child { flex: 1; }
 .board-head span:last-child { width: 4rem; text-align: right; }
 .board-rows { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.35rem; }
@@ -457,9 +470,12 @@ b, strong { font-weight: 800; }
 .goalbar {
   display: flex; align-items: center; gap: 1.1rem;
   padding: 0.6rem 1.1rem;
-  border: 1px solid var(--line);
-  border-radius: 0.8rem;
-  background: var(--panel);
+  border: 1px solid var(--glass-border);
+  border-radius: 1.2rem;
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(1.6);
+  backdrop-filter: blur(var(--blur)) saturate(1.6);
+  box-shadow: var(--glass-shadow);
 }
 .goalbar-title { font-size: 1rem; font-weight: 900; letter-spacing: 0.2em; color: var(--dim); }
 .goal { display: flex; align-items: baseline; gap: 0.55rem; flex: 1; }

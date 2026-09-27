@@ -44,3 +44,23 @@
   --sans: 'CTB Sans', 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   --mono: 'CTB Mono', ui-monospace, 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace;
 }
+
+/* ── glass tokens (Apple-style liquid glass over the dark base) ── */
+:root {
+  --glass: rgba(255, 255, 255, 0.06);
+  --glass-strong: rgba(255, 255, 255, 0.10);
+  --glass-border: rgba(255, 255, 255, 0.14);
+  --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  --blur: 24px;
+}
+@media (prefers-reduced-transparency: reduce) {
+  :root { --glass: var(--panel); --glass-strong: var(--panel-2); --glass-border: var(--line-2); --blur: 0px; }
+}
+.glass {
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(var(--blur)) saturate(1.6);
+  backdrop-filter: blur(var(--blur)) saturate(1.6);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  box-shadow: var(--glass-shadow);
+}
