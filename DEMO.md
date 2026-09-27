@@ -64,7 +64,7 @@ bun run scripts/serve.ts --lanes config/lanes.json --host 0.0.0.0 --port 4173
   (vault/ledger/memory/contacts) reacting, and a BREACHED (with proof + points) / DEFENDED verdict.
   It is driven entirely by the live event stream, so it is a real attack, not a replay.
 - `config/lanes.json` is the headline configuration: EASY naked/haiku, MEDIUM
-  prompted/haiku, HARD scoped/sonnet (claude-cli).
+  prompted/haiku, HARD gbrain/haiku — GBrain permission grants (claude-cli).
 - `config/lanes.local.json` runs every lane on local `qwen3:4b`. It makes no claude calls and uses
   no subscription quota. Use it if claude is slow, rate-limited or logged out.
 - `--backend/--model` override every lane. For example, `--backend fake` gives a UI-only dry run
@@ -143,7 +143,7 @@ credits) is being rebuilt. See [docs/river.md](docs/river.md).
   at most 4 concurrent (`CTB_CLAUDE_CONCURRENCY`) and at most 2000 calls per process
   (`CTB_CLAUDE_MAX_CALLS`). Each call is appended to `results/usage.jsonl`.
 - One live attack is one episode of up to `--max-steps` (default 8) model calls on its lane, plus up
-  to one repair retry per malformed reply. HARD (sonnet) is the expensive lane.
+  to one repair retry per malformed reply. HARD adds GBrain permission grants; all three lanes run on haiku.
 - Arena defaults (`src/server/arena.ts`): at most 3 attacks in flight per player and 20 queued per
   lane. Past either limit, the portal answers 429 with a "wait" message. Portal fields have length
   limits (`src/server/attack.ts`, for example message ≤ 4000 characters).
